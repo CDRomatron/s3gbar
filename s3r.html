@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Spyro Randomizer</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #121212;
+      color: #eee;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #ffd166;
+    }
+
+    button {
+      background: #06d6a0;
+      border: none;
+      color: #111;
+      padding: 8px 14px;
+      margin-right: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #05b488;
+    }
+
+    .controls {
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #1e1e1e;
+      border-radius: 6px;
+      border: 1px solid #444;
+    }
+
+    .controls label {
+      margin-right: 10px;
+    }
+
+    .controls input {
+      width: 50px;
+      margin-right: 20px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      border: 1px solid #555;
+      background: #111;
+      color: #eee;
+    }
+
+    .output-panel {
+      margin-top: 20px;
+      padding: 15px;
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 6px;
+    }
+
+    .output-panel h2 {
+      margin-top: 0;
+      color: #ffd166;
+    }
+
+    .output-box {
+      background: #111;
+      color: #eee;
+      padding: 10px;
+      border-radius: 4px;
+      max-height: 400px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    #status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #bbb;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Spyro Randomizer</h1>
+
+  <div class="controls">
+	<label for="optCustomSeed">Seed:</label>
+	<input id="optCustomSeed" type="text" placeholder="(blank = random)" style="width:120px;" />
+
+    <label for="optLength">Length(1-Short 2-Medium, 3-Long, 0-Any):</label>
+    <input id="optLength" type="number" min="0" max="3" value="0" />
+  </div>
+
+  <div>
+    <button onclick="generateSeed()">Generate Seed</button>
+    <button onclick="toggleSpoiler()">Toggle Spoiler Log</button>
+    <button onclick="toggleWotD()">Toggle Way of the Dragon</button>
+	<label for="romUpload">Upload GBA ROM:</label>
+  <input id="romUpload" type="file" accept=".gba" />
+<button onclick="patchRom()">Patch ROM</button>
+
+  </div>
+  
+  <div id="patchStatus"></div>
+
+
+  <div id="status"></div>
+
+  <!-- SPOILER LOG PANEL -->
+  <div id="spoilerLogContainer" class="output-panel" style="display:none;">
+    <h2>Spoiler Log</h2>
+    <pre id="spoilerLogOutput" class="output-box"></pre>
+  </div>
+
+  <!-- WAY OF THE DRAGON PANEL -->
+  <div id="wayOfTheDragonContainer" class="output-panel" style="display:none;">
+    <h2>Way of the Dragon</h2>
+    <pre id="wayOfTheDragonOutput" class="output-box"></pre>
+  </div>
+
+  <!-- LOAD YOUR FILES -->
+	<script src="itemIdMap.js"></script>
+	<script src="randomizerTable.js"></script>
+	<script src="logic.js"></script>
+	<script src="randomizer-original.js"></script>
+
+
+
+
+  <script>
+	  function seededRNG(seed) {
+	  let s = 0;
+	  for (let i = 0; i < seed.length; i++) {
+		s = (s * 31 + seed.charCodeAt(i)) >>> 0;
+	  }
+	  return function() {
+		s = (s * 1664525 + 1013904223) >>> 0;
+		return (s >>> 0) / 0xFFFFFFFF;
+	  };
+	}
+
+    function generateSeed() {
+    const status = document.getElementById("status");
+    status.textContent = "Generating...";
+
+    const seedInput =
+        document.getElementById("optCustomSeed").value.trim();
+
+    let restoreRandom = null;
+
+    if (seedInput) {
+        const rng = seededRNG(seedInput);
+        restoreRandom = Math.random;
+        Math.random = rng;
+    }
+
+    try {
+	
+		const seedLen = parseInt(document.getElementById("optLength").value, 10)
+	
+        let rando = window.randomizeOriginal(
+            window.randomizerTable
+        );
+		
+		while(
+			rando._spheres.length == 0 
+			|| (rando._maxSphere > 6 && seedLen == 1)
+			|| (rando._maxSphere < 7 && rando._maxSphere > 10 && seedLen == 2)
+			|| (rando._maxSphere < 11 && seedLen == 3)
+			) {
+			rando = window.randomizeOriginal(
+				window.randomizerTable
+			);
+		}
+
+        document.getElementById("spoilerLogOutput").textContent =
+            rando._spoiler;
+
+        document.getElementById("wayOfTheDragonOutput").textContent =
+            rando._wayOfTheDragon;
+			
+		window.lastGeneratedSeed = rando;
+
+        status.textContent = "Generation complete.";
+    } catch (e) {
+        console.error(e);
+        status.textContent = "Error: " + e.message;
+    }
+
+    if (restoreRandom) {
+        Math.random = restoreRandom;
+    }
+}
+
+    function toggleSpoiler() {
+      const el = document.getElementById("spoilerLogContainer");
+      el.style.display = (el.style.display === "none") ? "block" : "none";
+    }
+
+    function toggleWotD() {
+      const el = document.getElementById("wayOfTheDragonContainer");
+      el.style.display = (el.style.display === "none") ? "block" : "none";
+    }
+
+    window.generateSeed = generateSeed;
+    window.toggleSpoiler = toggleSpoiler;
+    window.toggleWotD = toggleWotD;
+  </script>
+  
+  <script>
+(function normalizeRandomizerTable() {
+  const table = window.randomizerTable;
+
+  // Normalize addresses only — DO NOT touch itemData
+  for (const loc of table) {
+    if (Array.isArray(loc.addresses)) {
+      loc.addresses = loc.addresses.map(a =>
+        typeof a === "string" ? parseInt(a, 16) : a
+      );
+    }
+  }
+})();
+
+let loadedRomBytes = null;
+
+document.getElementById("romUpload").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const arrayBuffer = await file.arrayBuffer();
+  loadedRomBytes = new Uint8Array(arrayBuffer);
+
+  document.getElementById("patchStatus").textContent =
+    "ROM loaded (" + loadedRomBytes.length + " bytes)";
+});
+
+function extractSingleItemName(value) {
+  if (!value) return null;
+
+  // Split by known item names
+  for (const name of Object.keys(window.itemData)) {
+    if (value.includes(name)) {
+      return name;
+    }
+  }
+
+  return null;
+}
+
+function extractItemName(raw) {
+  if (!raw) return null;
+
+  for (const name of Object.keys(window.itemData)) {
+    if (raw.includes(name)) {
+      return name;
+    }
+  }
+
+  return null;
+}
+
+async function patchRom() {
+  const status = document.getElementById("patchStatus");
+
+  if (!loadedRomBytes) {
+    status.textContent = "No ROM loaded.";
+    return;
+  }
+
+  if (!window.lastGeneratedSeed) {
+    status.textContent = "Generate a seed first.";
+    return;
+  }
+
+  const seed = window.lastGeneratedSeed;
+  const placed = [];
+  const spheres = Array.from(seed._spheres);
+  
+	for(const sphere of spheres) {
+		for(const loc of sphere) {
+			placed.push(loc);
+		}
+	}
+
+  const table = window.randomizerTable;
+  const original = loadedRomBytes;
+  const patched = new Uint8Array(original);
+
+  // Build ID → itemData lookup
+  const itemDataById = {};
+  for (const [name, info] of Object.entries(window.itemData)) {
+    itemDataById[info.id] = info;
+  }
+
+  for (const loc of table) {
+    if (!loc.addresses || loc.addresses.length === 0) continue;
+
+    const normalName = loc.item;
+	const randomizedRaw = placed.filter(obj => {
+		return obj.location == loc.location;
+	})[0].item;
+
+	const randomizedName = extractItemName(randomizedRaw);
+
+	if (!randomizedName) {
+	  console.error("Could not extract item name from:", randomizedRaw);
+	  continue;
+	}
+
+	const normalItemId = window.itemData[normalName]?.id;
+	const randomizedItemId = window.itemData[randomizedName]?.id;
+
+	if (normalItemId == null) {
+	  console.error("Missing ID for NORMAL item:", normalName);
+	  continue;
+	}
+	if (randomizedItemId == null) {
+	  console.error("Missing ID for RANDOMIZED item:", randomizedName);
+	  continue;
+	}
+
+    const normalInfo = itemDataById[normalItemId];
+    const randomInfo = itemDataById[randomizedItemId];
+
+    if (!normalInfo || !randomInfo) {
+      console.error("Missing itemData entry for IDs:", normalItemId, randomizedItemId);
+      continue;
+    }
+
+    const normalRom = normalInfo.rom;
+    const randomRom = randomInfo.rom;
+
+    if (normalRom + 2 >= patched.length || randomRom + 2 >= patched.length) {
+      console.error("ROM address out of range:", normalRom, randomRom);
+      continue;
+    }
+
+    // Read original type byte (third byte)
+    const originalTypeByte = original[normalRom + 2];
+
+    // Write ONLY the type byte to the randomized item's ROM entry
+    patched[randomRom + 2] = originalTypeByte;
+    // Write randomized item ID to all location addresses
+    for (let addr of loc.addresses) {
+		console.log("writing " + randomizedItemId.toString(16) + " to " + addr);
+      if (typeof addr === "string") addr = parseInt(addr, 16);
+      if (addr >= 0 && addr < patched.length) {
+        patched[addr] = randomizedItemId & 0xFF;
+      }
+    }
+  }
+
+  const blob = new Blob([patched], { type: "application/octet-stream" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "SpyroRandomized.gba";
+  a.click();
+
+  URL.revokeObjectURL(url);
+
+  status.textContent = "ROM patched and downloaded.";
+}
+
+// Convert item name → hex ID
+function getItemId(itemName) {
+  // You will fill this with your actual mapping
+  return window.itemIdMap[itemName] ?? null;
+}
+</script>
+</body>
+</html>
