@@ -131,6 +131,7 @@
 	<script src="randomizerTable.js"></script>
 	<script src="logic.js"></script>
 	<script src="randomizer-original.js"></script>
+	<script src="patcher.js"></script>
 
 
 
@@ -226,19 +227,6 @@
   </script>
   
   <script>
-(function normalizeRandomizerTable() {
-  const table = window.randomizerTable;
-
-  // Normalize addresses only — DO NOT touch itemData
-  for (const loc of table) {
-    if (Array.isArray(loc.addresses)) {
-      loc.addresses = loc.addresses.map(a =>
-        typeof a === "string" ? parseInt(a, 16) : a
-      );
-    }
-  }
-})();
-
 let loadedRomBytes = null;
 
 document.getElementById("romUpload").addEventListener("change", async (e) => {
@@ -252,140 +240,6 @@ document.getElementById("romUpload").addEventListener("change", async (e) => {
     "ROM loaded (" + loadedRomBytes.length + " bytes)";
 });
 
-function extractSingleItemName(value) {
-  if (!value) return null;
-
-  // Split by known item names
-  for (const name of Object.keys(window.itemData)) {
-    if (value.includes(name)) {
-      return name;
-    }
-  }
-
-  return null;
-}
-
-function extractItemName(raw) {
-  if (!raw) return null;
-
-  for (const name of Object.keys(window.itemData)) {
-    if (raw.includes(name)) {
-      return name;
-    }
-  }
-
-  return null;
-}
-
-async function patchRom() {
-  const status = document.getElementById("patchStatus");
-
-  if (!loadedRomBytes) {
-    status.textContent = "No ROM loaded.";
-    return;
-  }
-
-  if (!window.lastGeneratedSeed) {
-    status.textContent = "Generate a seed first.";
-    return;
-  }
-
-  const seed = window.lastGeneratedSeed;
-  const placed = [];
-  const spheres = Array.from(seed._spheres);
-  
-	for(const sphere of spheres) {
-		for(const loc of sphere) {
-			placed.push(loc);
-		}
-	}
-
-  const table = window.randomizerTable;
-  const original = loadedRomBytes;
-  const patched = new Uint8Array(original);
-
-  // Build ID → itemData lookup
-  const itemDataById = {};
-  for (const [name, info] of Object.entries(window.itemData)) {
-    itemDataById[info.id] = info;
-  }
-
-  for (const loc of table) {
-    if (!loc.addresses || loc.addresses.length === 0) continue;
-
-    const normalName = loc.item;
-	const randomizedRaw = placed.filter(obj => {
-		return obj.location == loc.location;
-	})[0].item;
-
-	const randomizedName = extractItemName(randomizedRaw);
-
-	if (!randomizedName) {
-	  console.error("Could not extract item name from:", randomizedRaw);
-	  continue;
-	}
-
-	const normalItemId = window.itemData[normalName]?.id;
-	const randomizedItemId = window.itemData[randomizedName]?.id;
-
-	if (normalItemId == null) {
-	  console.error("Missing ID for NORMAL item:", normalName);
-	  continue;
-	}
-	if (randomizedItemId == null) {
-	  console.error("Missing ID for RANDOMIZED item:", randomizedName);
-	  continue;
-	}
-
-    const normalInfo = itemDataById[normalItemId];
-    const randomInfo = itemDataById[randomizedItemId];
-
-    if (!normalInfo || !randomInfo) {
-      console.error("Missing itemData entry for IDs:", normalItemId, randomizedItemId);
-      continue;
-    }
-
-    const normalRom = normalInfo.rom;
-    const randomRom = randomInfo.rom;
-
-    if (normalRom + 2 >= patched.length || randomRom + 2 >= patched.length) {
-      console.error("ROM address out of range:", normalRom, randomRom);
-      continue;
-    }
-
-    // Read original type byte (third byte)
-    const originalTypeByte = original[normalRom + 2];
-
-    // Write ONLY the type byte to the randomized item's ROM entry
-    patched[randomRom + 2] = originalTypeByte;
-    // Write randomized item ID to all location addresses
-    for (let addr of loc.addresses) {
-		console.log("writing " + randomizedItemId.toString(16) + " to " + addr);
-      if (typeof addr === "string") addr = parseInt(addr, 16);
-      if (addr >= 0 && addr < patched.length) {
-        patched[addr] = randomizedItemId & 0xFF;
-      }
-    }
-  }
-
-  const blob = new Blob([patched], { type: "application/octet-stream" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "SpyroRandomized.gba";
-  a.click();
-
-  URL.revokeObjectURL(url);
-
-  status.textContent = "ROM patched and downloaded.";
-}
-
-// Convert item name → hex ID
-function getItemId(itemName) {
-  // You will fill this with your actual mapping
-  return window.itemIdMap[itemName] ?? null;
-}
 </script>
 </body>
 </html>
