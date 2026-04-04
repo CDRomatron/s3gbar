@@ -155,12 +155,21 @@
         document.getElementById("optCustomSeed").value.trim();
 
     let restoreRandom = null;
+	let seed = 0;
 
     if (seedInput) {
         const rng = seededRNG(seedInput);
+		seed = seedInput;
         restoreRandom = Math.random;
         Math.random = rng;
     }
+	else {
+		const randomSeed = Math.floor(Math.random() * 10000000).toString();
+		seed = randomSeed;
+		const rng = seededRNG(randomSeed);
+		restoreRandom = Math.random;
+        Math.random = rng;
+	}
 
     try {
 	
@@ -188,8 +197,9 @@
             rando._wayOfTheDragon;
 			
 		window.lastGeneratedSeed = rando;
+		window.seed = seed;
 
-        status.textContent = "Generation complete.";
+        status.textContent = "Generation complete. Seed = " + seed;
     } catch (e) {
         console.error(e);
         status.textContent = "Error: " + e.message;
