@@ -1200,7 +1200,8 @@ window.randomizerTable = [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp"
+        "Yeti Lamp",
+		"Super Breath Mint"
       ]
     }
   },
@@ -1762,7 +1763,8 @@ window.randomizerTable = [
     "requirements": {
       "and": [
         "Mini Dynamo",
-        "Kangaroo Carving"
+        "Kangaroo Carving",
+		"Super Breath Mint"
       ]
     }
   },
