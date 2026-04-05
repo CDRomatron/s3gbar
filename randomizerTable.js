@@ -87,7 +87,7 @@ window.randomizerTable = [
     "id": "48",
     "itemHex": "0x48",
     "addresses": [
-      "0x0063868D"
+      "0x0063868F"
     ],
     "item": "Extenso-Grip Attachment",
     "location": "DS Oasis Toddler",
@@ -105,7 +105,7 @@ window.randomizerTable = [
     "id": "49",
     "itemHex": "0x49",
     "addresses": [
-      "0x006372FF"
+      "0x006372FD"
     ],
     "item": "Left Half of the Green Chest Key",
     "location": "DS Byrd Mission",
@@ -550,7 +550,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint",
+        "Ice Fairy Scroll",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
       ]
@@ -569,7 +569,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint"
+        "Ice Fairy Scroll"
       ]
     }
   },
@@ -586,7 +586,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint",
+        "Ice Fairy Scroll",
         "Master\u0027s Stethoscope",
         "Master\u0027s Nail File",
         "Master\u0027s Hand Drill",
@@ -610,7 +610,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint"
+        "Ice Fairy Scroll"
       ]
     }
   },
@@ -627,7 +627,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint"
+        "Ice Fairy Scroll"
       ]
     }
   },
@@ -644,7 +644,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint"
+        "Ice Fairy Scroll"
       ]
     }
   },
@@ -661,7 +661,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint"
+        "Ice Fairy Scroll"
       ]
     }
   },
@@ -678,7 +678,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint"
+        "Ice Fairy Scroll"
       ]
     }
   },
@@ -1173,7 +1173,9 @@ window.randomizerTable = [
   {
     "id": "85",
     "itemHex": "0x85",
-    "addresses": null,
+    "addresses": [
+		"0x00637A5D"
+	],
     "item": "Mini Dynamo",
     "location": "MM Butler Fight",
     "area": "Foyer",
@@ -1464,6 +1466,7 @@ window.randomizerTable = [
     "area": "Professor\u0027s Zoo",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Green Chest Key",
         "Right Half of the Green Chest Key",
@@ -1482,6 +1485,7 @@ window.randomizerTable = [
     "area": "Professor\u0027s Zoo",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Ice Fairy Scroll"
       ]
@@ -1498,6 +1502,7 @@ window.randomizerTable = [
     "area": "Professor\u0027s Zoo",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key",
@@ -1516,6 +1521,7 @@ window.randomizerTable = [
     "area": "Research Section",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
@@ -1533,6 +1539,7 @@ window.randomizerTable = [
     "area": "Professor\u0027s Zoo",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Yellow Chest Key",
         "Right Half of the Yellow Chest Key",
@@ -1551,6 +1558,7 @@ window.randomizerTable = [
     "area": "PSL Moneybags\u0027 Vault",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo"
       ]
     }
@@ -1566,6 +1574,7 @@ window.randomizerTable = [
     "area": "Research Section",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key"
@@ -1583,6 +1592,7 @@ window.randomizerTable = [
     "area": "Research Section",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key"
@@ -1600,6 +1610,7 @@ window.randomizerTable = [
     "area": "Rhynoc Retreat",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
@@ -1617,6 +1628,7 @@ window.randomizerTable = [
     "area": "Rallying Point",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo"
       ]
     }
@@ -1632,6 +1644,7 @@ window.randomizerTable = [
     "area": "Rhynoc Retreat",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo"
       ]
     }
@@ -1647,6 +1660,7 @@ window.randomizerTable = [
     "area": "Rescue Mission",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo"
       ]
     }
@@ -1662,6 +1676,7 @@ window.randomizerTable = [
     "area": "Rhynoc Retreat",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Yellow Chest Key",
         "Right Half of the Yellow Chest Key"
@@ -1679,6 +1694,7 @@ window.randomizerTable = [
     "area": "Rhynoc Retreat",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Left Half of the Yellow Chest Key",
         "Right Half of the Yellow Chest Key"
@@ -1728,6 +1744,7 @@ window.randomizerTable = [
     "area": "Ripto\u0027s Throne Room",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Kangaroo Carving",
         "Hot Banana Pepper",
@@ -1745,6 +1762,7 @@ window.randomizerTable = [
     "area": "Ripto\u0027s Throne Room",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Kangaroo Carving",
         "Hot Banana Pepper",
@@ -1762,6 +1780,7 @@ window.randomizerTable = [
     "area": "Ripto\u0027s Grand Expanse",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Kangaroo Carving",
 		"Super Breath Mint"
@@ -1779,6 +1798,7 @@ window.randomizerTable = [
     "area": "Ripto\u0027s Grand Expanse",
     "requirements": {
       "and": [
+		"Magic Spinning Top",
         "Mini Dynamo",
         "Kangaroo Carving",
         "Magic Spinning Top",
