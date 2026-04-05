@@ -703,7 +703,9 @@ window.randomizerTable = [
   {
     "id": "6C",
     "itemHex": "0x6C",
-    "addresses": [],
+    "addresses": [
+		"0x00638A2D"
+	],
     "item": "Magic Spinning Top",
     "location": "RH Join the Halves",
     "area": "Land of Wonder and Amazement",
