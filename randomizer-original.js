@@ -55,7 +55,21 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 			const reachable = reachableLocations(unFilledAfter, tempInventory);
 			
 			for(const loc of reachable) {
-				sphere.push({ location: loc.location, item: itemPoolAfter[0] })
+				
+				while(itemPoolAfter[0] == "Hero\u0027s Heart Medal" || itemPoolAfter[0] == "Heart of the Thieves\u0027 Guild") {
+					itemPoolAfter = shuffleArray(itemPoolAfter);
+				}
+				if (loc.location.substring(0,2) == "RH" && loc.location.includes("Chest") && itemPoolAfter.indexOf("Hero\u0027s Heart Medal") != -1) {
+					const itemIndex = itemPoolAfter.indexOf("Hero\u0027s Heart Medal")
+					itemPoolAfter[itemIndex] = itemPoolAfter[0];
+					itemPoolAfter[0] = "Hero\u0027s Heart Medal";
+				} else if (loc.location == "TG Moneybags" && itemPoolAfter.indexOf("Heart of the Thieves\u0027 Guild") != -1) {
+					const itemIndex = itemPoolAfter.indexOf("Heart of the Thieves\u0027 Guild")
+					itemPoolAfter[itemIndex] = itemPoolAfter[0];
+					itemPoolAfter[0] = "Heart of the Thieves\u0027 Guild";
+				}
+				
+				sphere.push({ location: loc.location, item: itemPoolAfter[0] });
 				tempInventory.items.add(itemPoolAfter[0]);
 				itemPoolAfter.splice(0,1);
 				const index = unFilledAfter.indexOf(loc);
