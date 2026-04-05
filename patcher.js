@@ -223,9 +223,9 @@ function encodeString(input) {
 }
 
 function buildTexts() {
-		textToAlter =  [{"name": "title", "address": 0x1F897E, "len": 11, "text": "RANDOMIZER!"}];
+		textToAlter =  [{"name": "title", "address": 0x1F897E, "len": 11, "text": "BEGIN RANDO"}];
 		seedText = ("           " + window.seed.toString()).slice(-11)
-		textToAlter.push({"name": "selectgame", "address": 0x1F89CD, "len": 11, "text": seedText});
+		textToAlter.push({"name": "selectgame", "address": 0x1F89CD, "len": 13, "text": seedText});
 		return textToAlter;
 }
 
@@ -324,7 +324,7 @@ async function patchRom() {
   
   for (let textReplace of textToAlter) {
 	  const encoded = encodeString(textReplace.text);
-	  for (let i = 0; i < encoded.length; i++) {
+	  for (let i = 0; i < textReplace.len; i++) {
 		patched[textReplace.address+i] = encoded[i];
 		console.log("writing " + encoded[i].toString(16) + " to " + textReplace.address+i.toString(16) + " " + textReplace.text);
 	  }
