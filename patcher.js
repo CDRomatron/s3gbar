@@ -222,10 +222,125 @@ function encodeString(input) {
     return packBits(bits);
 }
 
+function buildHints() {
+	//generate hints
+		let wotd = window.lastGeneratedSeed._wayOfTheDragon.slice();
+		wotd.splice(0,3);
+		wotd.splice(wotd.length-1, 1);
+		
+		hints = []
+		nest = 0;
+		coast = 0;
+		oasis = 0;
+		
+		for (let spoil of wotd) {
+			
+			const split = spoil.split("→");
+			const place = split[0];
+			const item = split[1];
+			const hub = place.substring(place.indexOf(":")+2,place.indexOf(":")+4);
+			
+			if (spoil.includes("Mission")) {	
+				hints.push(""+ hub + " Mission WotD");
+			}
+			
+			if (!spoil.includes("Fairy Spell Book") 
+				&& !spoil.includes("Ice Fairy Scroll")
+				&& !spoil.includes("Super Breath Mint")
+				&& !spoil.includes("Hot Banana Pepper")
+				&& !spoil.includes("Yeti Lamp")
+				&& !spoil.includes("Magic Spinning Top")
+				&& !spoil.includes("Mini Dynamo")
+				&& !spoil.includes("Kangaroo Carving")) {
+
+				hint = "";
+				if (item.includes("Left Half")) {
+					hint = "WotD " + item.substring(18);
+				} else if (item.includes("Right Half")) {
+					hint = "WotD " + item.substring(19);
+				} else {
+					hint = "WotD " + item.substring(1);
+				}
+				if (hints.indexOf(hint) == -1) {
+					hints.push(hint);
+				}
+			}
+			
+			if (hub == "FL" || hub == "BS" || hub == "PL" 
+				|| hub == "RC" || hub == "CR" || place.includes("DS Find all the Toys") 
+				|| place.includes("DS Moneybags") || place.includes("DS Nest Toddler")) {
+				nest++;	
+			} else if (hub == "YS" || hub == "BB" || hub == "RH" || place.includes("DS Flower")) {
+				coast++;
+			} else if (hub == "KH" || hub == "MM" || hub == "CS" 
+				|| place.includes("DS Green Chest") || place.includes("DS Oasis Toddler") 
+				|| place.includes("DS Byrd Mission")) {
+				oasis++;
+			}
+		}
+		
+		hints.push("Oasis WotD " + oasis);
+		hints.push("Nest WotD " + nest);
+		hints.push("Coast WotD " + coast);
+		
+		hints = shuffleArray(hints);
+		
+		hubs = ["DS","FL","YS","BB","TG","RH","BS","KH","MM","CS"]
+		hubHints = []
+
+		for (let hub of hubs) {
+			hint = "";
+			if (!wotd.some((element) => element.includes(hub))) {
+				hint = hub + " Barren";
+			} else {
+				if(hints.length > 0) {
+					hint = hints[0];
+					hints.splice(0,1);
+				} else {
+					hint = "No Hint";
+				}
+				
+			}
+			hubHints.push(hint);
+		}
+		
+		if (!wotd.some((element) => element.includes("PL") || element.includes("CR") || element.includes("RC"))) {
+			hubHints.push("No items past here");
+		} else {
+			hubHints.push("Something past here");
+		}
+		
+		for(let hubHint of hubHints) {
+			console.log(hubHint);
+		}
+		
+		return hubHints;
+}
+
 function buildTexts() {
 		textToAlter =  [{"name": "title", "address": 0x1F897E, "len": 11, "text": "BEGIN RANDO"}];
 		seedText = ("           " + window.seed.toString()).slice(-11)
-		textToAlter.push({"name": "selectgame", "address": 0x1F89CD, "len": 13, "text": seedText});
+		textToAlter.push({"name": "selectgame", "address": 0x1F89CD, "len": 14, "text": seedText});
+		
+		const hints = buildHints();
+		
+		textToAlter.push({"name": "dsFairyA1", "address": 0x1FB0CC, "len": 42, "text": hints[0]});
+		textToAlter.push({"name": "dsFairyA3", "address": 0x1FB128, "len": 44, "text": hints[0]});
+		textToAlter.push({"name": "dsFairyB1", "address": 0x1FAE09, "len": 44, "text": hints[1]});
+		textToAlter.push({"name": "dsFairyB2", "address": 0x1FAE36, "len": 49, "text": hints[1]});
+		textToAlter.push({"name": "dsYetiSign", "address": 0x1FB5B8, "len": 18, "text": hints[2]});
+		textToAlter.push({"name": "dsByrdSign", "address": 0x1FB5CB, "len": 22, "text": hints[3]});
+		textToAlter.push({"name": "dsThief", "address": 0x1FB04D, "len": 49, "text": hints[4]});
+		textToAlter.push({"name": "dsRaHaSign", "address": 0x1FB582, "len": 19, "text": hints[5]});
+		textToAlter.push({"name": "dsBaSaSign", "address": 0x1FB52C, "len": 33, "text": hints[6]});
+		textToAlter.push({"name": "dsKaHoSign", "address": 0x1FB596, "len": 33, "text": hints[7]});
+		textToAlter.push({"name": "dsMinibags", "address": 0x1FB2A2, "len": 45, "text": hints[8]});
+		textToAlter.push({"name": "dsCheeta1", "address": 0x1FBB0A, "len": 34, "text": hints[9]});
+		textToAlter.push({"name": "dsCheeta3", "address": 0x1FBB56, "len": 41, "text": hints[9]});
+		textToAlter.push({"name": "plIntro", "address": 0x1F74F8, "len": 31, "text": hints[10]});
+		
+		
+		
 		return textToAlter;
 }
 
@@ -323,10 +438,31 @@ async function patchRom() {
   const textToAlter = buildTexts();
   
   for (let textReplace of textToAlter) {
-	  const encoded = encodeString(textReplace.text);
+	  let encoded = encodeString(textReplace.text);
+	  let padFlag = true;
+	  let padCount = 0;
+	  let testEncode;
+	  
+	  if (encoded.length >= textReplace.len) {
+		  padFlag = false;
+	  }
+	  while (padFlag) {
+		  let testString = textReplace.text;
+		  for(let j = 0; j < padCount; j++) {
+			testString += " ";  
+		  }
+		  let localEncode = encodeString(testString);
+		  if (localEncode.length <= textReplace.len && padCount < 10) {
+			  testEncode = localEncode;
+			  padCount++;
+		  } else {
+			  padFlag = false
+			  encoded = testEncode;
+		  }
+	  }
 	  for (let i = 0; i < textReplace.len; i++) {
 		patched[textReplace.address+i] = encoded[i];
-		console.log("writing " + encoded[i].toString(16) + " to " + textReplace.address+i.toString(16) + " " + textReplace.text);
+		//console.log("writing " + encoded[i].toString(16) + " to " + textReplace.address+i.toString(16) + " " + textReplace.text);
 	  }
   }
 

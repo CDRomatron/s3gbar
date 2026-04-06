@@ -420,5 +420,5 @@ function generateWayOfTheDragon(spheres, placed) {
     }
   }
 
-  return out.join("\n");
+  return out;
 }
