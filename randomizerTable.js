@@ -344,7 +344,7 @@ window.randomizerTable = [
     "id": "58",
     "itemHex": "0x58",
     "addresses": [
-      "0x002FEF12"
+      "0x002F3F12"
     ],
     "item": "Medal of Liberation",
     "location": "YS Whistling Statues",
