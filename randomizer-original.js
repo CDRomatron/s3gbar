@@ -76,10 +76,10 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 					itemPoolAfter[itemIndex] = itemPoolAfter[0];
 					itemPoolAfter[0] = "Magic Rainbow Dust";
 				}
-				 else if (loc.location == "DS Moneybags" && itemPoolAfter.indexOf("Magic Gold Dust") != -1) {
-					const itemIndex = itemPoolAfter.indexOf("Magic Gold Dust")
+				 else if (loc.location == "DS Moneybags" && itemPoolAfter.indexOf("Magic Red Dust") != -1) {
+					const itemIndex = itemPoolAfter.indexOf("Magic Red Dust")
 					itemPoolAfter[itemIndex] = itemPoolAfter[0];
-					itemPoolAfter[0] = "Magic Gold Dust";
+					itemPoolAfter[0] = "Magic Red Dust";
 				}
 				 else if (loc.location == "CS Moneybags" && itemPoolAfter.indexOf("Military Cross") != -1) {
 					const itemIndex = itemPoolAfter.indexOf("Military Cross")
