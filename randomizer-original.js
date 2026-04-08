@@ -58,7 +58,7 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 				
 				while(itemPoolAfter[0] == "Hero\u0027s Heart Medal" 
 					|| itemPoolAfter[0] == "Heart of the Thieves\u0027 Guild"
-					|| itemPoolAfter[0] == "Magic Rainbow Dust")
+					|| itemPoolAfter[0] == "Magic Rainbow Dust"
 					|| itemPoolAfter[0] == "Military Cross"
 					|| itemPoolAfter[0] == "Magic Gold Dust") {
 					itemPoolAfter = shuffleArray(itemPoolAfter);
