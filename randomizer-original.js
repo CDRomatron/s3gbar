@@ -58,7 +58,9 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 				
 				while(itemPoolAfter[0] == "Hero\u0027s Heart Medal" 
 					|| itemPoolAfter[0] == "Heart of the Thieves\u0027 Guild"
-					|| itemPoolAfter[0] == "Magic Rainbow Dust") {
+					|| itemPoolAfter[0] == "Magic Rainbow Dust")
+					|| itemPoolAfter[0] == "Military Cross"
+					|| itemPoolAfter[0] == "Magic Gold Dust") {
 					itemPoolAfter = shuffleArray(itemPoolAfter);
 				}
 				if (loc.location.substring(0,2) == "RH" && loc.location.includes("Chest") && itemPoolAfter.indexOf("Hero\u0027s Heart Medal") != -1) {
@@ -73,6 +75,16 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 					const itemIndex = itemPoolAfter.indexOf("Magic Rainbow Dust")
 					itemPoolAfter[itemIndex] = itemPoolAfter[0];
 					itemPoolAfter[0] = "Magic Rainbow Dust";
+				}
+				 else if (loc.location == "DS Moneybags" && itemPoolAfter.indexOf("Magic Gold Dust") != -1) {
+					const itemIndex = itemPoolAfter.indexOf("Magic Gold Dust")
+					itemPoolAfter[itemIndex] = itemPoolAfter[0];
+					itemPoolAfter[0] = "Magic Gold Dust";
+				}
+				 else if (loc.location == "CS Moneybags" && itemPoolAfter.indexOf("Military Cross") != -1) {
+					const itemIndex = itemPoolAfter.indexOf("Military Cross")
+					itemPoolAfter[itemIndex] = itemPoolAfter[0];
+					itemPoolAfter[0] = "Military Cross";
 				}
 				
 				sphere.push({ location: loc.location, item: itemPoolAfter[0] });
