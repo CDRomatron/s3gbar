@@ -60,7 +60,7 @@ window.randomizerTable = [
     "id": "46",
     "itemHex": "0x46",
     "addresses": [
-      "0x00637A77"
+      "0x00637A77","0x001CBB7A"
     ],
     "item": "Spyro Action Figure",
     "location": "DS Moneybags",
