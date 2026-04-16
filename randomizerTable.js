@@ -124,7 +124,8 @@ window.randomizerTable = [
     "id": "4A",
     "itemHex": "0x4A",
     "addresses": [
-      "0x0063895F"
+      "0x0063895F",
+	  "0x0002F926"
     ],
     "item": "Book-B-Gone Storage Unit",
     "location": "DS Nest Toddler",
@@ -415,7 +416,10 @@ window.randomizerTable = [
     "itemHex": "0x5C",
     "addresses": [
       "0x00637E6C",
-	  "0x00027E02"
+	  "0x00027E02",
+	  "0x000364A2",
+	  "0x00027956",
+	  "0x00027F58"
     ],
     "item": "Super Breath Mint",
     "location": "BB Deliver Intro Penguin",
