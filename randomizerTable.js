@@ -414,7 +414,8 @@ window.randomizerTable = [
     "id": "5C",
     "itemHex": "0x5C",
     "addresses": [
-      "0x00637E6C"
+      "0x00637E6C",
+	  "0x00027E02"
     ],
     "item": "Super Breath Mint",
     "location": "BB Deliver Intro Penguin",
