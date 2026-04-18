@@ -493,7 +493,8 @@ window.randomizerTable = [
     "id": "60",
     "itemHex": "0x60",
     "addresses": [
-      "0x00637E12"
+      "0x00637E12",
+	  "0x00637E28"
     ],
     "item": "Sgt. Byrd Action Figure",
     "location": "BB Rhynoc Bombing",
