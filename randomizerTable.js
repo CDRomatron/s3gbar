@@ -105,7 +105,9 @@ window.randomizerTable = [
     "id": "49",
     "itemHex": "0x49",
     "addresses": [
-      "0x006372FD"
+      "0x006372FD",
+	  "0x00052FA4",
+	  "0x001CC51A"
     ],
     "item": "Left Half of the Green Chest Key",
     "location": "DS Byrd Mission",
@@ -511,7 +513,9 @@ window.randomizerTable = [
     "id": "61",
     "itemHex": "0x61",
     "addresses": [
-      "0x00637225"
+      "0x00637225",
+	  "0x00052fa8",
+	  "0x001CC522"
     ],
     "item": "Right Half of the Red Chest Key",
     "location": "BB Byrd Mission",
@@ -658,7 +662,9 @@ window.randomizerTable = [
     "id": "69",
     "itemHex": "0x69",
     "addresses": [
-      "0x00637105"
+      "0x00637105",
+	  "0x001CC4FA",
+	  "0x00056EEC"
     ],
     "item": "Left Half of the Red Chest Key",
     "location": "TG Agent 9 Mission",
@@ -675,7 +681,8 @@ window.randomizerTable = [
     "id": "6A",
     "itemHex": "0x6A",
     "addresses": [
-      "0x0063795F"
+      "0x0063795F",
+	  "0x001CBB82"
     ],
     "item": "Quick-N-Quiet Motivator Unit",
     "location": "TG Moneybags",
@@ -965,7 +972,9 @@ window.randomizerTable = [
     "id": "7A",
     "itemHex": "0x7A",
     "addresses": [
-      "0x00637195"
+      "0x00637195",
+	  "0x001CC502",
+	  "0x00056EF0"
     ],
     "item": "Right Half of the Green Chest Key",
     "location": "BS Agent 9 Mission",
@@ -1289,7 +1298,9 @@ window.randomizerTable = [
     "id": "8A",
     "itemHex": "0x8A",
     "addresses": [
-      "0x0063714D"
+      "0x0063714D",
+	  "0x001CC50A",
+	  "0x00056EF4"
     ],
     "item": "Left Half of the Purple Chest Key",
     "location": "MM Agent 9 Mission",
@@ -1431,19 +1442,19 @@ window.randomizerTable = [
     "id": "91",
     "itemHex": "0x91",
     "addresses": [
-      "0x006371DD"
+      "0x006371DD",
+	  "0x001CC512",
+	  "0x00056EF8"
     ],
     "item": "Left Half of the Yellow Chest Key",
-    "location": "CS Yellow Chest",
+    "location": "CS Agent 9 Mission",
     "area": "Stealth Mission",
     "requirements": {
       "and": [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp",
-        "Left Half of the Yellow Chest Key",
-        "Right Half of the Yellow Chest Key"
+        "Yeti Lamp"
       ]
     }
   },
@@ -1663,7 +1674,9 @@ window.randomizerTable = [
     "id": "9E",
     "itemHex": "0x9E",
     "addresses": [
-      "0x006372B5"
+      "0x006372B5",
+	  "0x00052FAC",
+	  "0x001CC52A"
     ],
     "item": "Right Half of the Purple Chest Key",
     "location": "RC Byrd Mission",
@@ -1732,7 +1745,9 @@ window.randomizerTable = [
     "id": "A2",
     "itemHex": "0xA2",
     "addresses": [
-      "0x0063726D"
+      "0x0063726D",
+	  "0x00052FB0",
+	  "0x001CC532"
     ],
     "item": "Right Half of the Yellow Chest Key",
     "location": "CR Byrd Mission",
