@@ -882,7 +882,9 @@ window.randomizerTable = [
     "id": "75",
     "itemHex": "0x75",
     "addresses": [
-      "0x00637C81"
+      "0x00637C81",
+	  "0x0003A46E",
+	  "0x0003A532"
     ],
     "item": "Hot Banana Pepper",
     "location": "BS Help Intro Monkey",
