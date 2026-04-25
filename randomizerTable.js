@@ -923,7 +923,8 @@ window.randomizerTable = [
     "id": "77",
     "itemHex": "0x77",
     "addresses": [
-      "0x00637B1A"
+      "0x00637B1A",
+	  "0x001CD4C4"
     ],
     "item": "Dusty User Manual",
     "location": "BS Hit all the Targets",
