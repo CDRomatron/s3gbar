@@ -1039,7 +1039,8 @@ window.randomizerTable = [
     "id": "7D",
     "itemHex": "0x7D",
     "addresses": [
-      "0x0063746A"
+      "0x0063746A",
+	  "0x000350E0"
     ],
     "item": "Kangaroo Carving",
     "location": "KH Help Intro Kangaroo",
@@ -1084,7 +1085,8 @@ window.randomizerTable = [
     "id": "7F",
     "itemHex": "0x7F",
     "addresses": [
-      "0x00637406"
+      "0x00637406",
+	  "0x001CD4AC"
     ],
     "item": "Flavor Booster",
     "location": "KH Destroy the TVs",
