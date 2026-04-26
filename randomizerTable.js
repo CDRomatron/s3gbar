@@ -613,7 +613,9 @@ window.randomizerTable = [
     "id": "66",
     "itemHex": "0x66",
     "addresses": [
-      "0x0063856F"
+      "0x0063856F",
+	  "0x0002C202",
+	  "0x0002C86D"
     ],
     "item": "Agent 9 Action Figure",
     "location": "TG Catch Fast Eddie",
