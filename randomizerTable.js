@@ -1654,7 +1654,10 @@ window.randomizerTable = [
     "id": "9C",
     "itemHex": "0x9C",
     "addresses": [
-      "0x0063891C"
+      "0x0063891C",
+	  "0x0003A632",
+	  "0x0003A7AA",
+	  "0x0003A8AE"
     ],
     "item": "Antennae Extensions",
     "location": "RC Toddler",
