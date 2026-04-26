@@ -1229,10 +1229,22 @@ window.randomizerTable = [
     "requirements": {
       "and": [
         "Fairy Spell Book",
-        "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp",
-		"Super Breath Mint"
+        "Mini Dynamo",
+        "Kangaroo Carving",
+		"Super Breath Mint",
+		"Ice Fairy Scroll",
+		"Hot Banana Pepper",
+		"Yeti Lamp",
+		"Left Half of the Purple Chest Key",
+        "Right Half of the Purple Chest Key",
+		"Left Half of the Yellow Chest Key",
+        "Right Half of the Yellow Chest Key",
+		"Left Half of the Red Chest Key",
+        "Right Half of the Red Chest Key",
+		"Left Half of the Green Chest Key",
+        "Right Half of the Green Chest Key",
+		"Phoenix Shades"
       ]
     }
   },
@@ -1364,7 +1376,8 @@ window.randomizerTable = [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp"
+        "Yeti Lamp",
+		"Mini Dynamo"
       ]
     }
   },
@@ -1382,7 +1395,8 @@ window.randomizerTable = [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp"
+        "Yeti Lamp",
+		"Mini Dynamo"
       ]
     }
   },
@@ -1401,6 +1415,7 @@ window.randomizerTable = [
         "Hot Banana Pepper",
         "Magic Spinning Top",
         "Yeti Lamp",
+		"Mini Dynamo",
         "Hypnotic Light Organ",
         "Totally Retro Uniform",
         "Hip Neon Trophy",
@@ -1445,7 +1460,8 @@ window.randomizerTable = [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp"
+        "Yeti Lamp",
+		"Mini Dynamo"
       ]
     }
   },
@@ -1465,7 +1481,8 @@ window.randomizerTable = [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp"
+        "Yeti Lamp",
+		"Mini Dynamo"
       ]
     }
   },
@@ -1481,10 +1498,23 @@ window.randomizerTable = [
     "area": "Fitness Center",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
+		"Fairy Spell Book",
         "Magic Spinning Top",
-        "Yeti Lamp"
+        "Mini Dynamo",
+        "Kangaroo Carving",
+		"Super Breath Mint",
+		"Ice Fairy Scroll",
+		"Hot Banana Pepper",
+		"Yeti Lamp",
+		"Left Half of the Purple Chest Key",
+        "Right Half of the Purple Chest Key",
+		"Left Half of the Yellow Chest Key",
+        "Right Half of the Yellow Chest Key",
+		"Left Half of the Red Chest Key",
+        "Right Half of the Red Chest Key",
+		"Left Half of the Green Chest Key",
+        "Right Half of the Green Chest Key",
+		"Phoenix Shades"
       ]
     }
   },
@@ -1820,10 +1850,23 @@ window.randomizerTable = [
     "area": "Ripto\u0027s Grand Expanse",
     "requirements": {
       "and": [
+		"Fairy Spell Book",
 		"Magic Spinning Top",
         "Mini Dynamo",
         "Kangaroo Carving",
-		"Super Breath Mint"
+		"Super Breath Mint",
+		"Ice Fairy Scroll",
+		"Hot Banana Pepper",
+		"Yeti Lamp",
+		"Left Half of the Purple Chest Key",
+        "Right Half of the Purple Chest Key",
+		"Left Half of the Yellow Chest Key",
+        "Right Half of the Yellow Chest Key",
+		"Left Half of the Red Chest Key",
+        "Right Half of the Red Chest Key",
+		"Left Half of the Green Chest Key",
+        "Right Half of the Green Chest Key",
+		"Phoenix Shades"
       ]
     }
   },
