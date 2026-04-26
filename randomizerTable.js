@@ -1473,7 +1473,8 @@ window.randomizerTable = [
     "id": "92",
     "itemHex": "0x92",
     "addresses": [
-      "0x00637AC7"
+      "0x00637AC7",
+	  "0x001CBB8A"
     ],
     "item": "Master\u0027s Explosives",
     "location": "CS Moneybags",
