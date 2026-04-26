@@ -1434,7 +1434,8 @@ window.randomizerTable = [
     "id": "90",
     "itemHex": "0x90",
     "addresses": [
-      "0x00636D46"
+      "0x00636D46",
+	  "0x00636D5C"
     ],
     "item": "Military Cross",
     "location": "CS Rhynoc Bombing",
