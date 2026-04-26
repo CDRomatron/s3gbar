@@ -570,7 +570,9 @@ window.randomizerTable = [
     "id": "64",
     "itemHex": "0x64",
     "addresses": [
-      "0x006388C3"
+      "0x006388C3",
+	  "0x0002C3A7",
+	  "0x0002C87C"
     ],
     "item": "Magic Rainbow Dust",
     "location": "TG Toddler",
