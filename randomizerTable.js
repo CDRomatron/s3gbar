@@ -87,7 +87,8 @@ window.randomizerTable = [
     "id": "48",
     "itemHex": "0x48",
     "addresses": [
-      "0x0063868F"
+      "0x0063868F",
+	  "0x0002FA3E"
     ],
     "item": "Extenso-Grip Attachment",
     "location": "DS Oasis Toddler",
