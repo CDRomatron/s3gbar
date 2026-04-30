@@ -1174,7 +1174,7 @@ window.randomizerTable = [
         "Hot Banana Pepper",
         "Magic Spinning Top",
         "Yeti Lamp",
-        "Magic Spinning Top"
+        "Mini Dynamo"
       ]
     }
   },
@@ -1192,6 +1192,7 @@ window.randomizerTable = [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
+		"Mini Dynamo",
         "Yeti Lamp",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
@@ -1261,6 +1262,7 @@ window.randomizerTable = [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
+		"Mini Dynamo",
         "Yeti Lamp"
       ]
     }
@@ -1276,12 +1278,7 @@ window.randomizerTable = [
     "area": "MM Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-        {
-          "or": [
-            "Magic Spinning Top",
-            "Mini Dynamo"
-          ]
-        },
+		"Mini Dynamo",
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
@@ -1300,12 +1297,7 @@ window.randomizerTable = [
     "area": "Hall of Majesty",
     "requirements": {
       "and": [
-        {
-          "or": [
-            "Magic Spinning Top",
-            "Mini Dynamo"
-          ]
-        },
+		"Mini Dynamo",
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
@@ -1328,12 +1320,7 @@ window.randomizerTable = [
     "area": "Stealth Mission",
     "requirements": {
       "and": [
-        {
-          "or": [
-            "Magic Spinning Top",
-            "Mini Dynamo"
-          ]
-        },
+		"Mini Dynamo",
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
@@ -1355,6 +1342,7 @@ window.randomizerTable = [
         "Fairy Spell Book",
         "Hot Banana Pepper",
         "Magic Spinning Top",
+		"Mini Dynamo",
         "Yeti Lamp",
         "Left Half of the Green Chest Key",
         "Right Half of the Green Chest Key"
