@@ -561,7 +561,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Ice Fairy Scroll",
+        "Super Breath Mint",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
       ]
@@ -582,7 +582,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Ice Fairy Scroll"
+        "Super Breath Mint"
       ]
     }
   },
@@ -599,7 +599,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Ice Fairy Scroll",
+        "Super Breath Mint",
         "Master\u0027s Stethoscope",
         "Master\u0027s Nail File",
         "Master\u0027s Hand Drill",
@@ -625,7 +625,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Ice Fairy Scroll"
+        "Super Breath Mint"
       ]
     }
   },
@@ -642,7 +642,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Ice Fairy Scroll"
+        "Super Breath Mint"
       ]
     }
   },
@@ -659,7 +659,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Ice Fairy Scroll"
+        "Super Breath Mint"
       ]
     }
   },
@@ -678,7 +678,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Ice Fairy Scroll"
+        "Super Breath Mint"
       ]
     }
   },
@@ -696,7 +696,7 @@ window.randomizerTable = [
       "and": [
         "Fairy Spell Book",
         "Yeti Lamp",
-        "Ice Fairy Scroll"
+        "Super Breath Mint"
       ]
     }
   },
