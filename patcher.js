@@ -270,7 +270,7 @@ function buildHints() {
 				|| hub == "RC" || hub == "CR" || place.includes("DS Find all the Toys") 
 				|| place.includes("DS Moneybags") || place.includes("DS Nest Toddler")) {
 				nest++;	
-			} else if (hub == "YS" || hub == "BB" || hub == "RH" || place.includes("DS Flower")) {
+			} else if (hub == "YS" || hub == "BB" || hub == "RH" || hub == "TG" || place.includes("DS Flower")) {
 				coast++;
 			} else if (hub == "KH" || hub == "MM" || hub == "CS" 
 				|| place.includes("DS Green Chest") || place.includes("DS Oasis Toddler") 
