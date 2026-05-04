@@ -344,6 +344,8 @@ function buildTexts() {
 		return textToAlter;
 }
 
+
+
 async function patchRom() {
   const status = document.getElementById("patchStatus");
 
@@ -443,23 +445,8 @@ async function patchRom() {
 	  let padCount = 0;
 	  let testEncode;
 	  
-	  if (encoded.length >= textReplace.len) {
-		  padFlag = false;
-	  }
-	  while (padFlag) {
-		  let testString = textReplace.text;
-		  for(let j = 0; j < padCount; j++) {
-			testString += " ";  
-		  }
-		  let localEncode = encodeString(testString);
-		  if (localEncode.length <= textReplace.len && padCount < 10) {
-			  testEncode = localEncode;
-			  padCount++;
-		  } else {
-			  padFlag = false
-			  encoded = testEncode;
-		  }
-	  }
+	  patched[textReplace.address-1] = textReplace.text.length;
+	  
 	  for (let i = 0; i < textReplace.len; i++) {
 		patched[textReplace.address+i] = encoded[i];
 		//console.log("writing " + encoded[i].toString(16) + " to " + textReplace.address+i.toString(16) + " " + textReplace.text);
