@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Spyro Rando – Manual Placement</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    background: #121212;
+    color: #eee;
+    font-family: system-ui, sans-serif;
+  }
+  h1 { color: #ffd166; }
+  select {
+    background: #1e1e1e;
+    color: #eee;
+    border: 1px solid #444;
+    padding: 4px;
+    border-radius: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  td, th {
+    padding: 6px;
+    border-bottom: 1px solid #333;
+  }
+  button {
+    background: #06d6a0;
+    border: none;
+    color: #111;
+    padding: 8px 14px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  button:hover { background: #05b488; }
+</style>
+</head>
+
+<body>
+<h1>Manual Item Placement</h1>
+
+<label>Upload ROM:</label>
+<input id="romUpload" type="file" accept=".gba" />
+<div id="patchStatus"></div>
+
+<table id="manualTable">
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Item</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<button onclick="applyManualSeed()">Patch ROM With Manual Layout</button>
+
+<script src="itemIdMap.js"></script>
+<script src="randomizerTable.js"></script>
+<script src="logic.js"></script>
+<script src="randomizer-original.js"></script>
+<script src="patcher.js"></script>
+
+<script>
+let loadedRomBytes = null;
+
+document.getElementById("romUpload").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const arrayBuffer = await file.arrayBuffer();
+  loadedRomBytes = new Uint8Array(arrayBuffer);
+  document.getElementById("patchStatus").textContent =
+    "ROM loaded (" + loadedRomBytes.length + " bytes)";
+});
+
+/* -----------------------------
+   BUILD DROPDOWN UI
+------------------------------*/
+const itemNames = Object.keys(window.itemData);
+const tableBody = document.querySelector("#manualTable tbody");
+
+window.randomizerTable.forEach(loc => {
+  const row = document.createElement("tr");
+
+  const tdLoc = document.createElement("td");
+  tdLoc.textContent = loc.location;
+
+  const tdSel = document.createElement("td");
+  const sel = document.createElement("select");
+  sel.id = "sel_" + loc.location.replace(/[^a-zA-Z0-9]/g, "_");
+
+  itemNames.forEach(name => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    if (name === loc.item) opt.selected = true;
+    sel.appendChild(opt);
+  });
+
+  tdSel.appendChild(sel);
+  row.appendChild(tdLoc);
+  row.appendChild(tdSel);
+  tableBody.appendChild(row);
+});
+
+/* -----------------------------
+   BUILD A FAKE SEED FOR PATCHER
+------------------------------*/
+function applyManualSeed() {
+  const placed = [];
+  const spheres = [[]]; // everything in sphere 0
+
+  window.randomizerTable.forEach(loc => {
+    const sel = document.getElementById("sel_" + loc.location.replace(/[^a-zA-Z0-9]/g, "_"));
+    const chosenItem = sel.value;
+
+    spheres[0].push({
+      location: loc.location,
+      item: chosenItem
+    });
+
+    placed.push({
+      location: loc.location,
+      item: chosenItem
+    });
+  });
+
+  placed._spheres = spheres;
+  placed._spoiler = ["Manual seed"];
+  placed._wayOfTheDragon = ["Manual seed"];
+  placed._maxSphere = 0;
+
+  window.lastGeneratedSeed = placed;
+  window.seed = "MANUAL";
+
+  patchRom();
+}
+</script>
+
+</body>
+</html>
