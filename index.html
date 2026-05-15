@@ -89,14 +89,35 @@
 </head>
 
 <body>
-  <h1>Spyro Randomizer</h1>
+  <h1>Spyro: Attack of the Rhynocs - Randomizer</h1>
 
   <div class="controls">
+	<h2>Gameplay</h2>
 	<label for="optCustomSeed">Seed:</label>
 	<input id="optCustomSeed" type="text" placeholder="(blank = random)" style="width:120px;" />
 
-    <label for="optLength">Length(1-Short 2-Medium, 3-Long, 0-Any):</label>
-    <input id="optLength" type="number" min="0" max="3" value="0" />
+    <label for="optLength">Length:</label>
+	<select id="optLength">
+		<option value="random">Random</option>
+		<option value="short">Short</option>
+		<option value="medium">Medium</option>
+		<option value="long">Long</option>
+	</select>
+
+	<label for="optMoneybags">Exclude Moneybags:</label>
+	<select id="optMoneybags">
+		<option value="off">Off</option>
+		<option value="moneybagsearly">All but DS & MM1</option>
+		<option value="moneybagsmm">All and MM</option>
+	</select>
+
+	<br/>
+	<h2>Extra</h2>
+	<label for="optHints">Enable Hints:</label>
+	<input id="optHints" type="checkbox" checked/>
+	
+	<label for="optSeedShow">Show Seed:</label>
+	<input id="optSeedShow" type="checkbox" checked/>
   </div>
 
   <div>
@@ -147,6 +168,34 @@
 		return (s >>> 0) / 0xFFFFFFFF;
 	  };
 	}
+	
+	function testInvalid(randomised, seedLen, moneyBagsOption) {
+		if (randomised._spheres.length == 0) {
+			return true;
+		}
+		
+		if (randomised._maxSphere > 6 && seedLen == 1) {
+			return true;
+		}
+		
+		if ((randomised._maxSphere < 7 || randomised._maxSphere > 10) && seedLen == 2) {
+			return true;
+		}
+		
+		if (randomised._maxSphere < 11 && seedLen == 3) {
+			return true;
+		}
+		
+		if (moneyBagsOption == 1 && randomised._wayOfTheDragon.some(x => x.includes("Moneybags") && !x.includes("Vault") && !x.includes("DS")) > 0) {
+			return true;
+		}
+		
+		if (moneyBagsOption == 2 && randomised._wayOfTheDragon.some(x => (x.includes("Moneybags") && !x.includes("Vault")) || x.includes("MM")) > 0) {
+			return true;
+		}
+		
+		return false;
+	}
 
     function generateSeed() {
     const status = document.getElementById("status");
@@ -174,18 +223,16 @@
 
     try {
 	
-		const seedLen = parseInt(document.getElementById("optLength").value, 10)
+		const seedLen = document.getElementById("optLength").selectedIndex;
+		const moneyBagsOption = document.getElementById("optMoneybags").selectedIndex;
+		
+		const lateMoneybags = ["CS Moneybags","MM Moneybags","CR Moneybags","TG Moneybags"]
 	
         let rando = window.randomizeOriginal(
             window.randomizerTable
         );
 		
-		while(
-			rando._spheres.length == 0 
-			|| (rando._maxSphere > 6 && seedLen == 1)
-			|| (rando._maxSphere < 7 && rando._maxSphere > 10 && seedLen == 2)
-			|| (rando._maxSphere < 11 && seedLen == 3)
-			) {
+		while(testInvalid(rando,seedLen,moneyBagsOption)) {
 			rando = window.randomizeOriginal(
 				window.randomizerTable
 			);

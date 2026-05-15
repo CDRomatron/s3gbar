@@ -222,7 +222,7 @@ function encodeString(input) {
     return packBits(bits);
 }
 
-function buildHints() {
+function buildHints(hintCount, barrenHint, areaHint, longHint, importantHint) {
 	//generate hints
 		let wotd = window.lastGeneratedSeed._wayOfTheDragon.slice();
 		wotd.splice(0,3);
@@ -310,34 +310,45 @@ function buildHints() {
 			hubHints.push("Something past here");
 		}
 		
-		for(let hubHint of hubHints) {
-			console.log(hubHint);
+		while (hubHints.length < hintCount) {
+			if(hints.length > 0) {
+					hint = hints[0];
+					hints.splice(0,1);
+			} else {
+				hint = "No Hint";
+			}
+			hubHints.push(hint);
 		}
 		
 		return hubHints;
 }
 
-function buildTexts() {
+function buildTexts(hintsEnabled, showSeed) {
 		textToAlter =  [{"name": "title", "address": 0x1F897E, "len": 11, "text": "BEGIN RANDO"}];
-		seedText = ("           " + window.seed.toString()).slice(-11)
-		textToAlter.push({"name": "selectgame", "address": 0x1F89CD, "len": 14, "text": seedText});
+		if (showSeed) {
+			seedText = ("           " + window.seed.toString()).slice(-11)
+			textToAlter.push({"name": "selectgame", "address": 0x1F89CD, "len": 14, "text": seedText});
+		}
 		
-		const hints = buildHints();
 		
-		textToAlter.push({"name": "dsFairyA1", "address": 0x1FB0CC, "len": 42, "text": hints[0]});
-		textToAlter.push({"name": "dsFairyA3", "address": 0x1FB128, "len": 44, "text": hints[0]});
-		textToAlter.push({"name": "dsFairyB1", "address": 0x1FAE09, "len": 44, "text": hints[1]});
-		textToAlter.push({"name": "dsFairyB2", "address": 0x1FAE36, "len": 49, "text": hints[1]});
-		textToAlter.push({"name": "dsYetiSign", "address": 0x1FB5B8, "len": 18, "text": hints[2]});
-		textToAlter.push({"name": "dsByrdSign", "address": 0x1FB5CB, "len": 22, "text": hints[3]});
-		textToAlter.push({"name": "dsThief", "address": 0x1FB04D, "len": 49, "text": hints[4]});
-		textToAlter.push({"name": "dsRaHaSign", "address": 0x1FB582, "len": 19, "text": hints[5]});
-		textToAlter.push({"name": "dsBaSaSign", "address": 0x1FB52C, "len": 33, "text": hints[6]});
-		textToAlter.push({"name": "dsKaHoSign", "address": 0x1FB596, "len": 33, "text": hints[7]});
-		textToAlter.push({"name": "dsMinibags", "address": 0x1FB2A2, "len": 45, "text": hints[8]});
-		textToAlter.push({"name": "dsCheeta1", "address": 0x1FBB0A, "len": 34, "text": hints[9]});
-		textToAlter.push({"name": "dsCheeta3", "address": 0x1FBB56, "len": 41, "text": hints[9]});
-		textToAlter.push({"name": "plIntro", "address": 0x1F74F8, "len": 31, "text": hints[10]});
+		if (hintsEnabled) {
+			const hints = buildHints(11,true,true,true,true);
+			
+			textToAlter.push({"name": "dsFairyA1", "address": 0x1FB0CC, "len": 42, "text": hints[0]});
+			textToAlter.push({"name": "dsFairyA3", "address": 0x1FB128, "len": 44, "text": hints[0]});
+			textToAlter.push({"name": "dsFairyB1", "address": 0x1FAE09, "len": 44, "text": hints[1]});
+			textToAlter.push({"name": "dsFairyB2", "address": 0x1FAE36, "len": 49, "text": hints[1]});
+			textToAlter.push({"name": "dsYetiSign", "address": 0x1FB5B8, "len": 18, "text": hints[2]});
+			textToAlter.push({"name": "dsByrdSign", "address": 0x1FB5CB, "len": 22, "text": hints[3]});
+			textToAlter.push({"name": "dsThief", "address": 0x1FB04D, "len": 49, "text": hints[4]});
+			textToAlter.push({"name": "dsRaHaSign", "address": 0x1FB582, "len": 19, "text": hints[5]});
+			textToAlter.push({"name": "dsBaSaSign", "address": 0x1FB52C, "len": 33, "text": hints[6]});
+			textToAlter.push({"name": "dsKaHoSign", "address": 0x1FB596, "len": 33, "text": hints[7]});
+			textToAlter.push({"name": "dsMinibags", "address": 0x1FB2A2, "len": 45, "text": hints[8]});
+			textToAlter.push({"name": "dsCheeta1", "address": 0x1FBB0A, "len": 34, "text": hints[9]});
+			textToAlter.push({"name": "dsCheeta3", "address": 0x1FBB56, "len": 41, "text": hints[9]});
+			textToAlter.push({"name": "plIntro", "address": 0x1F74F8, "len": 31, "text": hints[10]});
+		}
 		
 		
 		
@@ -437,7 +448,9 @@ async function patchRom() {
     }
   }
   
-  const textToAlter = buildTexts();
+  Math.random = seededRNG(window.seed);
+  
+  const textToAlter = buildTexts(document.getElementById("optHints").checked, document.getElementById("optSeedShow").checked);
   
   for (let textReplace of textToAlter) {
 	  let encoded = encodeString(textReplace.text);
@@ -458,7 +471,12 @@ async function patchRom() {
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = window.seed + ".gba";
+  if (document.getElementById("optSeedShow").checked) {
+	  a.download = window.seed + ".gba";
+  } else {
+	  a.download = "hidden.gba";
+  }
+  
   a.click();
 
   URL.revokeObjectURL(url);
