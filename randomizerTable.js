@@ -266,7 +266,6 @@ window.randomizerTable = [
     "area": "Frontier Region",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Yeti Lamp"
       ]
@@ -281,7 +280,6 @@ window.randomizerTable = [
     "area": "Frozen Hills",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll"
       ]
     }
@@ -297,7 +295,6 @@ window.randomizerTable = [
     "area": "Frontier Region",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key"
@@ -338,7 +335,6 @@ window.randomizerTable = [
     "area": "YS Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Yeti Lamp"
       ]
@@ -355,7 +351,6 @@ window.randomizerTable = [
     "area": "Whistling Caves",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Yeti Lamp"
       ]
@@ -372,7 +367,6 @@ window.randomizerTable = [
     "area": "Frontier Region",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key"
@@ -390,7 +384,6 @@ window.randomizerTable = [
     "area": "Frontier Region",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
@@ -408,7 +401,6 @@ window.randomizerTable = [
     "area": "Camp Headquarters",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Super Breath Mint"
       ]
@@ -429,7 +421,6 @@ window.randomizerTable = [
     "area": "H.Q. Perimiter",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll"
       ]
     }
@@ -445,7 +436,6 @@ window.randomizerTable = [
     "area": "Camp Headquarters",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Super Breath Mint",
         "Medal of Liberation",
@@ -469,7 +459,6 @@ window.randomizerTable = [
     "area": "Camp Headquarters",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Super Breath Mint"
       ]
@@ -486,7 +475,6 @@ window.randomizerTable = [
     "area": "BB Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Super Breath Mint"
       ]
@@ -504,7 +492,6 @@ window.randomizerTable = [
     "area": "Camp Headquarters",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Super Breath Mint"
       ]
@@ -523,7 +510,6 @@ window.randomizerTable = [
     "area": "Rescue Mission",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Ice Fairy Scroll",
         "Super Breath Mint"
       ]
@@ -540,7 +526,6 @@ window.randomizerTable = [
     "area": "Camp Headquarters",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key",
         "Ice Fairy Scroll",
@@ -559,9 +544,7 @@ window.randomizerTable = [
     "area": "Main Guild Hall",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
       ]
@@ -580,9 +563,7 @@ window.randomizerTable = [
     "area": "Secret Passage",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Yeti Lamp",
-        "Super Breath Mint"
+        "Yeti Lamp"
       ]
     }
   },
@@ -597,9 +578,7 @@ window.randomizerTable = [
     "area": "Main Guild Hall",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp",
-        "Super Breath Mint",
         "Master\u0027s Stethoscope",
         "Master\u0027s Nail File",
         "Master\u0027s Hand Drill",
@@ -623,9 +602,7 @@ window.randomizerTable = [
     "area": "Fast Eddie\u0027s Hideout",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Yeti Lamp",
-        "Super Breath Mint"
+        "Yeti Lamp"
       ]
     }
   },
@@ -640,9 +617,7 @@ window.randomizerTable = [
     "area": "TG Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Yeti Lamp",
-        "Super Breath Mint"
+        "Yeti Lamp"
       ]
     }
   },
@@ -657,9 +632,7 @@ window.randomizerTable = [
     "area": "Main Guild Hall",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Yeti Lamp",
-        "Super Breath Mint"
+        "Yeti Lamp"
       ]
     }
   },
@@ -676,9 +649,7 @@ window.randomizerTable = [
     "area": "Stealth Mission",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Yeti Lamp",
-        "Super Breath Mint"
+        "Yeti Lamp"
       ]
     }
   },
@@ -694,9 +665,7 @@ window.randomizerTable = [
     "area": "Main Guild Hall",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Yeti Lamp",
-        "Super Breath Mint"
+        "Yeti Lamp"
       ]
     }
   },
@@ -711,7 +680,6 @@ window.randomizerTable = [
     "area": "Land of Wonder and Amazement",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
@@ -731,7 +699,6 @@ window.randomizerTable = [
     "area": "Land of Wonder and Amazement",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp"
       ]
     }
@@ -747,7 +714,6 @@ window.randomizerTable = [
     "area": "Land of Wonder and Amazement",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp",
         "Dragon Star",
         "Yeti Lettuce",
@@ -770,7 +736,6 @@ window.randomizerTable = [
     "area": "RH Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp",
         "Magic Spinning Top"
       ]
@@ -787,7 +752,6 @@ window.randomizerTable = [
     "area": "Rhynoc Infestation",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp"
       ]
     }
@@ -803,7 +767,6 @@ window.randomizerTable = [
     "area": "Land of Wonder and Amazement",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp",
         "Magic Spinning Top",
         "Left Half of the Red Chest Key",
@@ -822,7 +785,6 @@ window.randomizerTable = [
     "area": "Land of Wonder and Amazement",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp",
         "Magic Spinning Top",
         "Left Half of the Red Chest Key",
@@ -841,7 +803,6 @@ window.randomizerTable = [
     "area": "Land of Wonder and Amazement",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
         "Yeti Lamp",
         "Magic Spinning Top",
         "Left Half of the Yellow Chest Key",
@@ -860,8 +821,6 @@ window.randomizerTable = [
     "area": "Primate Plantation",
     "requirements": {
       "and": [
-        "Ice Fairy Scroll",
-        "Super Breath Mint",
         "Left Half of the Green Chest Key",
         "Right Half of the Green Chest Key"
       ]
@@ -878,8 +837,6 @@ window.randomizerTable = [
     "area": "Primate Plantation",
     "requirements": {
       "and": [
-        "Ice Fairy Scroll",
-        "Super Breath Mint"
       ]
     }
   },
@@ -912,8 +869,6 @@ window.randomizerTable = [
     "area": "Primate Plantation",
     "requirements": {
       "and": [
-        "Ice Fairy Scroll",
-        "Super Breath Mint",
         "Banana Ripening Agent",
         "Magic Banana Dust",
         "Flavor Booster",
@@ -936,8 +891,6 @@ window.randomizerTable = [
     "area": "Primate Plantation",
     "requirements": {
       "and": [
-        "Ice Fairy Scroll",
-        "Super Breath Mint",
         "Hot Banana Pepper"
       ]
     }
@@ -953,8 +906,6 @@ window.randomizerTable = [
     "area": "BS Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-        "Ice Fairy Scroll",
-        "Super Breath Mint"
       ]
     }
   },
@@ -969,8 +920,6 @@ window.randomizerTable = [
     "area": "Primate Plantation",
     "requirements": {
       "and": [
-        "Ice Fairy Scroll",
-        "Super Breath Mint",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key"
       ]
@@ -989,8 +938,6 @@ window.randomizerTable = [
     "area": "Stealth Mission",
     "requirements": {
       "and": [
-        "Ice Fairy Scroll",
-        "Super Breath Mint"
       ]
     }
   },
@@ -1005,11 +952,6 @@ window.randomizerTable = [
     "area": "dark cave",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-        "Super Breath Mint",
         "Left Half of the Green Chest Key",
         "Right Half of the Green Chest Key"
       ]
@@ -1026,12 +968,6 @@ window.randomizerTable = [
     "area": "The Outback",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-        "Super Breath Mint",
-        "Kangaroo Carving"
       ]
     }
   },
@@ -1066,11 +1002,6 @@ window.randomizerTable = [
     "area": "The Outback",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-        "Super Breath Mint",
         "The Roo Zetta Stone",
         "Kangaroo History",
         "The Roo Jewel",
@@ -1093,11 +1024,6 @@ window.randomizerTable = [
     "area": "The Outback",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-        "Super Breath Mint",
         "Kangaroo Carving"
       ]
     }
@@ -1111,11 +1037,6 @@ window.randomizerTable = [
     "area": "unnamed area",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-        "Super Breath Mint",
         "Kangaroo Carving"
       ]
     }
@@ -1131,11 +1052,6 @@ window.randomizerTable = [
     "area": "KH Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-        "Super Breath Mint"
       ]
     }
   },
@@ -1150,11 +1066,6 @@ window.randomizerTable = [
     "area": "The Outback",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-        "Super Breath Mint",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key"
       ]
@@ -1171,10 +1082,7 @@ window.randomizerTable = [
     "area": "Hall of Majesty",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp",
         "Mini Dynamo"
       ]
     }
@@ -1183,18 +1091,14 @@ window.randomizerTable = [
     "id": "84",
     "itemHex": "0x84",
     "addresses": [
-      "0x002B6BD3"
     ],
     "item": "Digeri-doodle",
     "location": "MM Purple Chest",
     "area": "Hall of Majesty",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
         "Magic Spinning Top",
 		"Mini Dynamo",
-        "Yeti Lamp",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
       ]
@@ -1211,10 +1115,6 @@ window.randomizerTable = [
     "area": "Foyer",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp"
       ]
     }
   },
@@ -1260,11 +1160,9 @@ window.randomizerTable = [
     "area": "Closet",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
         "Magic Spinning Top",
-		"Mini Dynamo",
-        "Yeti Lamp"
+		"Mini Dynamo"
+
       ]
     }
   },
@@ -1280,10 +1178,7 @@ window.randomizerTable = [
     "requirements": {
       "and": [
 		"Mini Dynamo",
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp"
+        "Magic Spinning Top"
       ]
     }
   },
@@ -1299,10 +1194,7 @@ window.randomizerTable = [
     "requirements": {
       "and": [
 		"Mini Dynamo",
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp",
         "Left Half of the Green Chest Key",
         "Right Half of the Green Chest Key"
       ]
@@ -1322,10 +1214,7 @@ window.randomizerTable = [
     "requirements": {
       "and": [
 		"Mini Dynamo",
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp"
+        "Magic Spinning Top"
       ]
     }
   },
@@ -1340,11 +1229,6 @@ window.randomizerTable = [
     "area": "Fitness Center",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-		"Mini Dynamo",
-        "Yeti Lamp",
         "Left Half of the Green Chest Key",
         "Right Half of the Green Chest Key"
       ]
@@ -1361,11 +1245,6 @@ window.randomizerTable = [
     "area": "Fitness Center",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-		"Mini Dynamo"
       ]
     }
   },
@@ -1380,11 +1259,6 @@ window.randomizerTable = [
     "area": "Lobby",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-		"Mini Dynamo"
       ]
     }
   },
@@ -1399,11 +1273,6 @@ window.randomizerTable = [
     "area": "Fitness Center",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-		"Mini Dynamo",
         "Hypnotic Light Organ",
         "Totally Retro Uniform",
         "Hip Neon Trophy",
@@ -1425,10 +1294,7 @@ window.randomizerTable = [
     "area": "Fitness Center",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
         "Magic Spinning Top",
-        "Yeti Lamp",
         "Mini Dynamo"
       ]
     }
@@ -1445,11 +1311,6 @@ window.randomizerTable = [
     "area": "Flying Mission",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-		"Mini Dynamo"
       ]
     }
   },
@@ -1466,11 +1327,6 @@ window.randomizerTable = [
     "area": "Stealth Mission",
     "requirements": {
       "and": [
-        "Fairy Spell Book",
-        "Hot Banana Pepper",
-        "Magic Spinning Top",
-        "Yeti Lamp",
-		"Mini Dynamo"
       ]
     }
   },
@@ -1517,8 +1373,6 @@ window.randomizerTable = [
     "area": "Professor\u0027s Zoo",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Green Chest Key",
         "Right Half of the Green Chest Key",
         "Ice Fairy Scroll"
@@ -1536,8 +1390,6 @@ window.randomizerTable = [
     "area": "Professor\u0027s Zoo",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Ice Fairy Scroll"
       ]
     }
@@ -1553,8 +1405,6 @@ window.randomizerTable = [
     "area": "Professor\u0027s Zoo",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key",
         "Ice Fairy Scroll"
@@ -1572,8 +1422,6 @@ window.randomizerTable = [
     "area": "Research Section",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
       ]
@@ -1583,15 +1431,12 @@ window.randomizerTable = [
     "id": "97",
     "itemHex": "0x97",
     "addresses": [
-      "0x0029D9FA"
     ],
     "item": "Phoenix Shades",
     "location": "PL Yellow Chest",
     "area": "Professor\u0027s Zoo",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Yellow Chest Key",
         "Right Half of the Yellow Chest Key",
         "Ice Fairy Scroll"
@@ -1609,8 +1454,6 @@ window.randomizerTable = [
     "area": "PSL Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo"
       ]
     }
   },
@@ -1625,8 +1468,6 @@ window.randomizerTable = [
     "area": "Research Section",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key"
       ]
@@ -1643,8 +1484,6 @@ window.randomizerTable = [
     "area": "Research Section",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Red Chest Key",
         "Right Half of the Red Chest Key"
       ]
@@ -1661,8 +1500,6 @@ window.randomizerTable = [
     "area": "Rhynoc Retreat",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Purple Chest Key",
         "Right Half of the Purple Chest Key"
       ]
@@ -1682,8 +1519,6 @@ window.randomizerTable = [
     "area": "Rallying Point",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo"
       ]
     }
   },
@@ -1698,8 +1533,6 @@ window.randomizerTable = [
     "area": "Rhynoc Retreat",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo"
       ]
     }
   },
@@ -1716,8 +1549,6 @@ window.randomizerTable = [
     "area": "Rescue Mission",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo"
       ]
     }
   },
@@ -1732,8 +1563,6 @@ window.randomizerTable = [
     "area": "Rhynoc Retreat",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Yellow Chest Key",
         "Right Half of the Yellow Chest Key"
       ]
@@ -1750,8 +1579,6 @@ window.randomizerTable = [
     "area": "Rhynoc Retreat",
     "requirements": {
       "and": [
-		"Magic Spinning Top",
-        "Mini Dynamo",
         "Left Half of the Yellow Chest Key",
         "Right Half of the Yellow Chest Key"
       ]
@@ -1768,7 +1595,6 @@ window.randomizerTable = [
     "area": "CR Moneybags\u0027 Vault",
     "requirements": {
       "and": [
-        "Mini Dynamo",
         "Kangaroo Carving",
         "Magic Spinning Top"
       ]
@@ -1787,7 +1613,6 @@ window.randomizerTable = [
     "area": "Rescue Mission",
     "requirements": {
       "and": [
-        "Mini Dynamo",
         "Kangaroo Carving",
         "Magic Spinning Top"
       ]

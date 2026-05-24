@@ -110,6 +110,12 @@
 		<option value="moneybagsearly">All but DS & MM1</option>
 		<option value="moneybagsmm">All and MM</option>
 	</select>
+	
+	<label for="optEntrance">Entrance Randomizer:</label>
+	<select id="optEntrance">
+		<option value="off">Off</option>
+		<option value="level">Level (WIP)</option>
+	</select>
 
 	<br/>
 	<h2>Extra</h2>
@@ -150,6 +156,7 @@
   <!-- LOAD YOUR FILES -->
 	<script src="itemIdMap.js"></script>
 	<script src="randomizerTable.js"></script>
+	<script src="levelTable.js"></script>
 	<script src="logic.js"></script>
 	<script src="randomizer-original.js"></script>
 	<script src="patcher.js"></script>
@@ -225,16 +232,18 @@
 	
 		const seedLen = document.getElementById("optLength").selectedIndex;
 		const moneyBagsOption = document.getElementById("optMoneybags").selectedIndex;
+		const entranceOption = document.getElementById("optEntrance").selectedIndex;
+		window.entranceOption = entranceOption;
 		
 		const lateMoneybags = ["CS Moneybags","MM Moneybags","CR Moneybags","TG Moneybags"]
 	
         let rando = window.randomizeOriginal(
-            window.randomizerTable
+            [...window.randomizerTable]
         );
 		
 		while(testInvalid(rando,seedLen,moneyBagsOption)) {
 			rando = window.randomizeOriginal(
-				window.randomizerTable
+				[...window.randomizerTable]
 			);
 		}
 

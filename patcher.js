@@ -355,6 +355,42 @@ function buildTexts(hintsEnabled, showSeed) {
 		return textToAlter;
 }
 
+function toTwoHexStrings(value) {
+    const hi = ((value >> 8) & 0xFF);
+    const lo = (value & 0xFF);
+    return { hi, lo };
+}
+
+function applyCanonicalMapping(canonical, random, patched) {
+    const table = window.levelTable;
+    const map = Object.fromEntries(table.map(x => [x.id, x]));
+
+    for (let i = 0; i < canonical.length; i++) {
+        const canon = map[canonical[i]];
+        const rand  = map[random[i]];
+
+        if (!canon || !rand) continue;
+
+        // Convert hex → int
+        const roomAddr = parseInt(canon.roomTable, 16);
+        const objAddr  = parseInt(rand.objTable, 16);
+
+        // 1. Write random room → canonical roomTable
+        patched[roomAddr] = Number(rand.room);
+
+        // 2. Compute rebuilt normal
+		const change = (Number(canon.door) - Number(rand.door));
+        const rebuilt = Number(rand.normal) + change;
+		
+		const hex = toTwoHexStrings(rebuilt);
+
+        // 3. Write rebuilt normal → random objTable
+        patched[objAddr] = hex.lo;
+        patched[objAddr+1] = hex.hi;
+    }
+}
+
+
 
 
 async function patchRom() {
@@ -447,6 +483,10 @@ async function patchRom() {
       }
     }
   }
+  
+  applyCanonicalMapping(["FL","YS","BB","TG","RH","BS","KH","MM","CS","PL","RC","CR"],seed._levels, patched);
+  
+  
   
   Math.random = seededRNG(window.seed);
   

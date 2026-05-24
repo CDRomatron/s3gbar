@@ -7,8 +7,373 @@ function shuffleArray(arr) {
 	return copy;
 }
 
+function generateMapVanilla(){
+	
+	return ["FL","YS","BB","TG","RH","BS","KH","MM","CS","PL","RC","CR"]
+}
+
+function generateMapOriginal(placeCRAtEnd) {
+
+	levels = ["","","","","","","","","","","",""]
+	
+	//place MM first
+	
+	doubleLevels = ["MM","PL","RC"]
+	singleLevels = []
+	
+	if (placeCRAtEnd) {
+		levels[11] = "CR"
+		singleLevels = ["FL","YS","BB","TG","RH","BS","KH","CS"]
+	}
+	else
+	{
+		singleLevels = ["FL","YS","BB","TG","RH","BS","KH","CS","CR"]
+	}
+	
+	//doubleLevels = shuffleArray(doubleLevels)
+	levels[7] = doubleLevels[0]
+	levels[9] = doubleLevels[1]
+	levels[10] = doubleLevels[2]
+	
+	singleLevels = shuffleArray(singleLevels)
+	levels[0] = singleLevels[0]
+	levels[1] = singleLevels[1]
+	levels[2] = singleLevels[2]
+	levels[3] = singleLevels[3]
+	levels[4] = singleLevels[4]
+	levels[5] = singleLevels[5]
+	levels[6] = singleLevels[6]
+	levels[8] = singleLevels[7]
+	
+	if (!placeCRAtEnd) {
+		levels[11] = singleLevels[8]
+	}
+	
+	return levels
+	
+}
+
+function generateMapMixed() {
+	
+	
+	
+}
+
+function getLevelIDs(levelCode) {
+
+	if(levelCode == "FL")
+		return ["4B","4C","4D","4E","4F","50","51","52"]
+	if(levelCode == "YS")
+		return ["53","54","55","56","57","58","59","5A"]
+	if(levelCode == "BB")
+		return ["5B","5C","5D","5E","5F","60","61","62"]
+	if(levelCode == "TG")
+		return ["63","64","65","66","67","68","69","6A"]
+	if(levelCode == "RH")
+		return ["6B","6C","6D","6E","6F","70","71","72"]
+	if(levelCode == "BS")
+		return ["73","74","76","77","78","79","7A"]
+	if(levelCode == "KH")
+		return ["7B","7C","7E","7F","80","81","82"]
+	if(levelCode == "MM")
+		return ["83","84","85","86","87","88","89","8A"]
+	if(levelCode == "CS")
+		return ["8B","8C","8D","8E","8F","90","91","92"]
+	if(levelCode == "PL")
+		return ["93","94","95","96","97","98","99","9A"]
+	if(levelCode == "RC")
+		return ["9B","9C","9D","9E","9F","A0",]
+	if(levelCode == "CR")
+		return ["A1","A2","A3","A4","A5","A6"]
+	return null
+	
+}
+
+function addRequirements(levels, table) {
+	
+	
+	let newTable = structuredClone(table);
+	
+	const newRequirementsYSBB = [
+		"Fairy Spell Book"
+	];
+	
+	const newRequirementsTG = [
+		"Fairy Spell Book",
+		"Super Breath Mint",
+		"Yeti Lamp"
+	];
+	
+	const newRequirementsRH = [
+		"Fairy Spell Book"
+	];
+	
+	const newRequirementsBS = [
+		"Fairy Spell Book",
+		"Ice Fairy Scroll",
+		"Super Breath Mint"
+	];
+	
+	const newRequirementsKH = [
+		"Fairy Spell Book",
+		"Hot Banana Pepper",
+		"Magic Spinning Top",
+		"Yeti Lamp",
+		"Ice Fairy Scroll",
+		"Super Breath Mint"
+		
+	];
+	
+	const newRequirementsMM = [
+		"Fairy Spell Book",
+		"Hot Banana Pepper",
+		"Magic Spinning Top",
+		"Yeti Lamp"
+	];
+	
+	const newRequirementsCS = [
+		"Fairy Spell Book",
+		"Hot Banana Pepper",
+		"Magic Spinning Top",
+		"Yeti Lamp",
+		"Mini Dynamo"
+	];
+	
+	const newRequirementsPLRCCR = [
+		"Magic Spinning Top",
+		"Mini Dynamo"
+	];
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[1]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsYSBB.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[2]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsYSBB.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[3]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsTG.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[4]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsRH.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[5]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsBS.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[6]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsKH.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[7]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsMM.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[8]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsCS.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[9]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsPLRCCR.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[10]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsPLRCCR.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	newTable.forEach(entry => {
+	  if (getLevelIDs(levels[11]).includes(entry.id)) {
+
+		if (!entry.requirements) {
+		  entry.requirements = { and: [] };
+		}
+
+		if (!Array.isArray(entry.requirements.and)) {
+		  entry.requirements.and = [];
+		}
+
+		newRequirementsPLRCCR.forEach(req => {
+		  if (!entry.requirements.and.includes(req)) {
+			entry.requirements.and.push(req);
+		  }
+		});
+	  }
+	});
+	
+	return newTable
+}
+
+
+
 window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 
+	let levels = []
+	if (window.entranceOption == 0) {
+		levels = generateMapVanilla();
+	}
+	else {
+		levels = generateMapOriginal(false);
+	}
+	
+	console.log(levels);
+	let newTable = addRequirements(levels, table)
+
+	
+	
+	
 	attempt = 0
 	
 	const placed = [];
@@ -17,8 +382,8 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 	
 	let inventory = { items: new Set() }
 	
-	const shuffledLocations = table.filter(l => l.addresses?.length > 0);
-    const fixedLocations = table.filter(l => !l.addresses || l.addresses.length === 0);
+	const shuffledLocations = newTable.filter(l => l.addresses?.length > 0);
+    const fixedLocations = newTable.filter(l => !l.addresses || l.addresses.length === 0);
 	
 	let sphereCount = 0;
 	
@@ -58,7 +423,8 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 				
 				while(itemPoolAfter[0] == "Hero\u0027s Heart Medal" 
 					|| itemPoolAfter[0] == "Heart of the Thieves\u0027 Guild"
-					|| itemPoolAfter[0] == "Military Cross") {
+					|| itemPoolAfter[0] == "Military Cross"
+					|| itemPoolAfter[0] == "Sunspot Bloom") {
 					itemPoolAfter = shuffleArray(itemPoolAfter);
 				}
 				if (loc.location.substring(0,2) == "RH" && loc.location.includes("Chest") && itemPoolAfter.indexOf("Hero\u0027s Heart Medal") != -1) {
@@ -74,7 +440,12 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 					const itemIndex = itemPoolAfter.indexOf("Military Cross")
 					itemPoolAfter[itemIndex] = itemPoolAfter[0];
 					itemPoolAfter[0] = "Military Cross";
+				} else if (loc.location.includes("CS") && itemPoolAfter.indexOf("Sunspot Bloom") != -1) {
+					const itemIndex = itemPoolAfter.indexOf("Sunspot Bloom")
+					itemPoolAfter[itemIndex] = itemPoolAfter[0];
+					itemPoolAfter[0] = "Sunspot Bloom";
 				}
+				
 				
 				sphere.push({ location: loc.location, item: itemPoolAfter[0] });
 				tempInventory.items.add(itemPoolAfter[0]);
@@ -119,9 +490,10 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 	
 	
 	placed._spheres = spheres;
-    placed._spoiler = generateSpoilerLog(placed, spheres);
-    placed._wayOfTheDragon = generateWayOfTheDragon(spheres, placed);
-	placed._maxSphere = generateMaxSphere(spheres, placed);
+    placed._spoiler = generateSpoilerLog(placed, spheres, newTable);
+    placed._wayOfTheDragon = generateWayOfTheDragon(spheres, placed, newTable);
+	placed._maxSphere = generateMaxSphere(spheres, placed, newTable);
+	placed._levels = levels;
 	
 	console.log(attempt);
 	
@@ -156,10 +528,10 @@ function generateSpoilerLog(placed, spheres) {
 // ------------------------------------------------------------
 // REQUIRED ITEMS (ALTTPR-style, MULTI-LOCATION REACHABILITY)
 // ------------------------------------------------------------
-window.computeRequiredItems = function computeRequiredItems(spheres, placed) {
+window.computeRequiredItems = function computeRequiredItems(spheres, placed, newTable) {
   const targetLocation = "CR Ripto";
 
-  const targetEntry = window.randomizerTable.find(e => e.location === targetLocation);
+  const targetEntry = newTable.find(e => e.location === targetLocation);
   if (!targetEntry) return new Set();
 
   // Flatten spheres into ordered items
@@ -200,7 +572,7 @@ window.computeRequiredItems = function computeRequiredItems(spheres, placed) {
     for (const reqItem of [...required]) {
 
       // Find the location that gives this required item
-      const reqLoc = window.randomizerTable.find(e => e.item === reqItem);
+      const reqLoc = newTable.find(e => e.item === reqItem);
       if (!reqLoc) continue;
 
       for (const candidate of orderedItems) {
@@ -220,7 +592,7 @@ window.computeRequiredItems = function computeRequiredItems(spheres, placed) {
 
         // Also check ALL required locations
         for (const otherReq of [...required]) {
-          const otherLoc = window.randomizerTable.find(e => e.item === otherReq);
+          const otherLoc = newTable.find(e => e.item === otherReq);
           if (!otherLoc) continue;
 
           if (!canAccess(otherLoc.requirements, testInv)) {
@@ -238,7 +610,7 @@ window.computeRequiredItems = function computeRequiredItems(spheres, placed) {
 // ------------------------------------------------------------
 // Max sphere
 // ------------------------------------------------------------
-function generateMaxSphere(spheres, placed) {
+function generateMaxSphere(spheres, placed, newTable) {
   const targetLocation = "CR Ripto";
 
   // ------------------------------------------------------------
@@ -277,7 +649,7 @@ function generateMaxSphere(spheres, placed) {
   }
 
   const requirementMap = {};
-  for (const loc of window.randomizerTable) {
+  for (const loc of newTable) {
     requirementMap[loc.location] = flatten(loc.requirements);
   }
 
@@ -329,7 +701,7 @@ function generateMaxSphere(spheres, placed) {
   return out;
 }
 
-function generateWayOfTheDragon(spheres, placed) {
+function generateWayOfTheDragon(spheres, placed, newTable) {
   const targetLocation = "CR Ripto";
 
   // ------------------------------------------------------------
@@ -368,7 +740,7 @@ function generateWayOfTheDragon(spheres, placed) {
   }
 
   const requirementMap = {};
-  for (const loc of window.randomizerTable) {
+  for (const loc of newTable) {
     requirementMap[loc.location] = flatten(loc.requirements);
   }
 
