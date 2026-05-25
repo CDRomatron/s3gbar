@@ -222,7 +222,7 @@ function encodeString(input) {
     return packBits(bits);
 }
 
-function buildHints(hintCount, barrenHint, areaHint, longHint, importantHint) {
+function buildHints(hintCount, barrenHint, areaHint, longHint, importantHint, levels) {
 	//generate hints
 		let wotd = window.lastGeneratedSeed._wayOfTheDragon.slice();
 		wotd.splice(0,3);
@@ -266,13 +266,13 @@ function buildHints(hintCount, barrenHint, areaHint, longHint, importantHint) {
 				}
 			}
 			
-			if (hub == "FL" || hub == "BS" || hub == "PL" 
-				|| hub == "RC" || hub == "CR" || place.includes("DS Find all the Toys") 
+			if (hub == levels[0] || hub == levels[5] || hub == levels[9] 
+				|| hub == levels[10] || hub == levels[11] || place.includes("DS Find all the Toys") 
 				|| place.includes("DS Moneybags") || place.includes("DS Nest Toddler")) {
 				nest++;	
-			} else if (hub == "YS" || hub == "BB" || hub == "RH" || hub == "TG" || place.includes("DS Flower")) {
+			} else if (hub == levels[1] || hub == levels[2] || hub == levels[4] || hub == levels[3] || place.includes("DS Flower")) {
 				coast++;
-			} else if (hub == "KH" || hub == "MM" || hub == "CS" 
+			} else if (hub == levels[6] || hub == levels[7] || hub == levels[8] 
 				|| place.includes("DS Green Chest") || place.includes("DS Oasis Toddler") 
 				|| place.includes("DS Byrd Mission")) {
 				oasis++;
@@ -285,8 +285,8 @@ function buildHints(hintCount, barrenHint, areaHint, longHint, importantHint) {
 		
 		hints = shuffleArray(hints);
 		
-		hubs = ["DS","FL","YS","BB","TG","RH","BS","KH","MM","CS"]
-		hubHints = []
+		hubs = levels;
+		hubHints = [];
 
 		for (let hub of hubs) {
 			hint = "";
@@ -304,7 +304,7 @@ function buildHints(hintCount, barrenHint, areaHint, longHint, importantHint) {
 			hubHints.push(hint);
 		}
 		
-		if (!wotd.some((element) => element.includes("PL") || element.includes("CR") || element.includes("RC"))) {
+		if (!wotd.some((element) => element.includes(levels[9]) || element.includes(levels[10]) || element.includes(levels[11]))) {
 			hubHints.push("No items past here");
 		} else {
 			hubHints.push("Something past here");
@@ -320,10 +320,12 @@ function buildHints(hintCount, barrenHint, areaHint, longHint, importantHint) {
 			hubHints.push(hint);
 		}
 		
+		console.log(hubHints);
+		
 		return hubHints;
 }
 
-function buildTexts(hintsEnabled, showSeed) {
+function buildTexts(hintsEnabled, showSeed, levels) {
 		textToAlter =  [{"name": "title", "address": 0x1F897E, "len": 11, "text": "BEGIN RANDO"}];
 		if (showSeed) {
 			seedText = ("           " + window.seed.toString()).slice(-11)
@@ -332,7 +334,7 @@ function buildTexts(hintsEnabled, showSeed) {
 		
 		
 		if (hintsEnabled) {
-			const hints = buildHints(11,true,true,true,true);
+			const hints = buildHints(11,true,true,true,true,levels);
 			
 			textToAlter.push({"name": "dsFairyA1", "address": 0x1FB0CC, "len": 42, "text": hints[0]});
 			textToAlter.push({"name": "dsFairyA3", "address": 0x1FB128, "len": 44, "text": hints[0]});
@@ -490,7 +492,7 @@ async function patchRom() {
   
   Math.random = seededRNG(window.seed);
   
-  const textToAlter = buildTexts(document.getElementById("optHints").checked, document.getElementById("optSeedShow").checked);
+  const textToAlter = buildTexts(document.getElementById("optHints").checked, document.getElementById("optSeedShow").checked, seed._levels);
   
   for (let textReplace of textToAlter) {
 	  let encoded = encodeString(textReplace.text);
