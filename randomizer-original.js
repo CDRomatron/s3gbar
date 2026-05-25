@@ -144,6 +144,23 @@ function addRequirements(levels, table) {
 		"Mini Dynamo"
 	];
 	
+	//require quick escape if the first level doesn't have enough gems (hacky fix)
+	if (levels[0] != "FL" && levels[0] != "CS" && levels[0] != "PL" && levels[0] != "RC") {
+		newTable.forEach(entry => {
+		  if (entry.id == 46) {
+
+			if (!entry.requirements) {
+			  entry.requirements = { and: [] };
+			}
+
+			if (!Array.isArray(entry.requirements.and)) {
+			  entry.requirements.and = [];
+			}
+				entry.requirements.and.push("Fairy Spell Book");
+			}
+		});
+	}
+	
 	newTable.forEach(entry => {
 	  if (getLevelIDs(levels[1]).includes(entry.id)) {
 
@@ -367,7 +384,6 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 	else {
 		levels = generateMapOriginal(false);
 	}
-	
 	console.log(levels);
 	let newTable = addRequirements(levels, table)
 
