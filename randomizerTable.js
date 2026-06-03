@@ -952,6 +952,7 @@ window.randomizerTable = [
     "area": "dark cave",
     "requirements": {
       "and": [
+		"Yeti Lamp",
         "Left Half of the Green Chest Key",
         "Right Half of the Green Chest Key"
       ]
