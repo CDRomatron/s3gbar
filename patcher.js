@@ -285,7 +285,7 @@ function buildHints(hintCount, barrenHint, areaHint, longHint, importantHint, le
 		
 		hints = shuffleArray(hints);
 		
-		hubs = levels;
+		hubs = ["DS"].concat(levels);
 		hubHints = [];
 
 		for (let hub of hubs) {
@@ -363,6 +363,217 @@ function toTwoHexStrings(value) {
     return { hi, lo };
 }
 
+function getOccurrenceLength(data, pos, maxLen, windowStart, windowLen) {
+    let bestLen = 0;
+    let bestDisp = 0;
+
+    for (let i = 0; i < windowLen; i++) {
+        let curLen = 0;
+        while (
+            curLen < maxLen &&
+            data[windowStart + i + curLen] === data[pos + curLen]
+        ) {
+            curLen++;
+        }
+
+        if (curLen > bestLen) {
+            bestLen = curLen;
+            // distance back from current position
+            bestDisp = windowLen - i;
+
+            if (bestLen === maxLen) break;
+        }
+    }
+
+    return { length: bestLen, disp: bestDisp };
+}
+
+
+function lz77DecompressBody(rom, startPos, decompressedSize) {
+    const output = new Uint8Array(decompressedSize);
+
+    const buffer = new Uint8Array(0x1000);
+    let bufferOffset = 0;
+
+    let pos = startPos;
+    let outPos = 0;
+    let flags = 0;
+    let mask = 1;
+
+    while (outPos < decompressedSize) {
+        if (mask === 1) {
+            flags = rom[pos++];
+            mask = 0x80;
+        } else {
+            mask >>= 1;
+        }
+
+        if (flags & mask) {
+            const byte1 = rom[pos++];
+            const byte2 = rom[pos++];
+
+            let length = (byte1 >> 4) + 3;
+            let disp = ((byte1 & 0x0F) << 8) | byte2;
+            disp += 1;
+
+            if (disp > outPos) {
+                throw new Error(
+                    `LZ77: DISP too large: disp=${disp}, outPos=${outPos}`
+                );
+            }
+
+            let bufIdx = (bufferOffset + 0x1000 - disp) & 0x0FFF;
+
+            for (let i = 0; i < length; i++) {
+                const next = buffer[bufIdx];
+                bufIdx = (bufIdx + 1) & 0x0FFF;
+
+                output[outPos++] = next;
+                buffer[bufferOffset] = next;
+                bufferOffset = (bufferOffset + 1) & 0x0FFF;
+            }
+        } else {
+            const next = rom[pos++];
+            output[outPos++] = next;
+
+            buffer[bufferOffset] = next;
+            bufferOffset = (bufferOffset + 1) & 0x0FFF;
+        }
+    }
+
+    return { decompressed: output, bytesRead: pos - startPos };
+}
+
+function lz77Compress(data) {
+    const out = [];
+    const outbuffer = new Uint8Array(8 * 2 + 1);
+    outbuffer[0] = 0;
+    let bufferlength = 1;
+    let bufferedBlocks = 0;
+    let readBytes = 0;
+
+    while (readBytes < data.length) {
+        // flush when 8 blocks buffered
+        if (bufferedBlocks === 8) {
+            for (let i = 0; i < bufferlength; i++) out.push(outbuffer[i]);
+            outbuffer[0] = 0;
+            bufferlength = 1;
+            bufferedBlocks = 0;
+        }
+
+        const oldLength = Math.min(readBytes, 0x1000);
+        const maxLen = Math.min(data.length - readBytes, 0x12);
+        const windowStart = readBytes - oldLength;
+
+        const { length, disp } = getOccurrenceLength(
+            data,
+            readBytes,
+            maxLen,
+            windowStart,
+            oldLength
+        );
+
+        if (length < 3) {
+            // raw byte
+            outbuffer[bufferlength++] = data[readBytes++];
+        } else {
+            // compressed block
+            readBytes += length;
+
+            outbuffer[0] |= 1 << (7 - bufferedBlocks);
+
+            outbuffer[bufferlength] = ((length - 3) << 4) & 0xF0;
+            outbuffer[bufferlength] |= ((disp - 1) >> 8) & 0x0F;
+            bufferlength++;
+
+            outbuffer[bufferlength] = (disp - 1) & 0xFF;
+            bufferlength++;
+        }
+
+        bufferedBlocks++;
+    }
+
+    if (bufferedBlocks > 0) {
+        for (let i = 0; i < bufferlength; i++) out.push(outbuffer[i]);
+    }
+
+    return Uint8Array.from(out);
+}
+
+
+function patchLZSS(rom, addressToDecode, length, offsetToChange, valueToWrite) {
+    let pos = addressToDecode;
+
+    // Header: [bits 4-7 = type (1), bits 0-3 reserved]
+    const header = rom[pos++];
+    const id = header >> 4;
+    const headerValue = header & 0x0F; // kept for parity with C#, though unused here
+
+    if (id !== 1) {
+        throw new Error(
+            `patchLZSS: Invalid LZ77 ID at 0x${addressToDecode.toString(16)}: ${id}`
+        );
+    }
+
+    // Decompressed size (24-bit, or 0 + 32-bit)
+    let decompressedSize =
+        rom[pos] |
+        (rom[pos + 1] << 8) |
+        (rom[pos + 2] << 16);
+    pos += 3;
+
+    if (decompressedSize === 0) {
+        decompressedSize =
+            rom[pos] |
+            (rom[pos + 1] << 8) |
+            (rom[pos + 2] << 16) |
+            (rom[pos + 3] << 24);
+        pos += 4;
+    }
+
+    const headerLen = pos - addressToDecode; // header + size bytes
+    const bodyStart = pos;
+
+    // 1) Decompress body
+    const { decompressed, bytesRead } = lz77DecompressBody(
+        rom,
+        bodyStart,
+        decompressedSize
+    );
+
+    // 2) Apply 16-bit little-endian patch
+    if (offsetToChange < 0 || offsetToChange + 1 >= decompressed.length) {
+        throw new Error(
+            `patchLZSS: offsetToChange out of range: ${offsetToChange} (len=${decompressed.length})`
+        );
+    }
+
+    decompressed[offsetToChange]     = valueToWrite & 0xFF;
+    decompressed[offsetToChange + 1] = (valueToWrite >> 8) & 0xFF;
+
+    // 3) Recompress body
+    const newBody = lz77Compress(decompressed);
+
+    const newTotalLen = headerLen + newBody.length;
+
+    // 4) Safety check: compressed size must match original
+    if (newTotalLen !== length) {
+        throw new Error(
+            `patchLZSS: Compressed size mismatch at 0x${addressToDecode.toString(16)}. ` +
+            `Original=${length}, New=${newTotalLen} (header=${headerLen}, body=${newBody.length})`
+        );
+    }
+
+    // 5) Write back: keep header as-is, replace body
+    // (header is already in rom; we only need to overwrite body)
+    const writePos = addressToDecode + headerLen;
+    for (let i = 0; i < newBody.length; i++) {
+        rom[writePos + i] = newBody[i];
+    }
+}
+
+
+
 function applyCanonicalMapping(canonical, random, patched) {
     const table = window.levelTable;
     const map = Object.fromEntries(table.map(x => [x.id, x]));
@@ -376,6 +587,7 @@ function applyCanonicalMapping(canonical, random, patched) {
         // Convert hex → int
         const roomAddr = parseInt(canon.roomTable, 16);
         const objAddr  = parseInt(rand.objTable, 16);
+		
 
         // 1. Write random room → canonical roomTable
         patched[roomAddr] = Number(rand.room);
@@ -384,11 +596,25 @@ function applyCanonicalMapping(canonical, random, patched) {
 		const change = (Number(canon.door) - Number(rand.door));
         const rebuilt = Number(rand.normal) + change;
 		
-		const hex = toTwoHexStrings(rebuilt);
+		
+		if(Object.hasOwn(rand, 'offset')) {
+			const len = parseInt(rand.len, 16);
+			const offset = parseInt(rand.offset, 16);
 
-        // 3. Write rebuilt normal → random objTable
-        patched[objAddr] = hex.lo;
-        patched[objAddr+1] = hex.hi;
+			// 3. Write rebuilt normal → random objTable
+			patchLZSS(patched, objAddr, len, offset, rebuilt)
+		}
+		else
+		{
+			const hex = toTwoHexStrings(rebuilt);
+		
+			// 3. Write rebuilt normal → random objTable
+			patched[objAddr] = hex.lo;
+			patched[objAddr+1] = hex.hi;
+		}
+		
+		
+		
     }
 }
 
@@ -492,7 +718,7 @@ async function patchRom() {
   
   Math.random = seededRNG(window.seed);
   
-  const textToAlter = buildTexts(document.getElementById("optHints").checked, document.getElementById("optSeedShow").checked, seed._levels);
+  const textToAlter = buildTexts(document.getElementById("optHints")?.checked ?? true, document.getElementById("optSeedShow")?.checked ?? true, seed._levels);
   
   for (let textReplace of textToAlter) {
 	  let encoded = encodeString(textReplace.text);
@@ -513,7 +739,7 @@ async function patchRom() {
 
   const a = document.createElement("a");
   a.href = url;
-  if (document.getElementById("optSeedShow").checked) {
+  if (document.getElementById("optSeedShow")?.checked ?? true) {
 	  a.download = window.seed + ".gba";
   } else {
 	  a.download = "hidden.gba";

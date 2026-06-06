@@ -50,6 +50,16 @@
 <input id="romUpload" type="file" accept=".gba" />
 <div id="patchStatus"></div>
 
+<table id="levelTable">
+  <thead>
+    <tr>
+      <th>Level</th>
+      <th>Destination</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
 <table id="manualTable">
   <thead>
     <tr>
@@ -67,8 +77,20 @@
 <script src="logic.js"></script>
 <script src="randomizer-original.js"></script>
 <script src="patcher.js"></script>
+<script src="levelTable.js"></script>
 
 <script>
+
+function seededRNG(seed) {
+	  let s = 0;
+	  for (let i = 0; i < seed.length; i++) {
+		s = (s * 31 + seed.charCodeAt(i)) >>> 0;
+	  }
+	  return function() {
+		s = (s * 1664525 + 1013904223) >>> 0;
+		return (s >>> 0) / 0xFFFFFFFF;
+	  };
+	}
 let loadedRomBytes = null;
 
 document.getElementById("romUpload").addEventListener("change", async (e) => {
@@ -79,6 +101,39 @@ document.getElementById("romUpload").addEventListener("change", async (e) => {
   document.getElementById("patchStatus").textContent =
     "ROM loaded (" + loadedRomBytes.length + " bytes)";
 });
+
+/* -----------------------------
+   BUILD LEVEL DROPDOWN UI
+------------------------------*/
+const levelTableBody = document.querySelector("#levelTable tbody");
+
+window.levelTable.forEach(level => {
+  const row = document.createElement("tr");
+
+  const tdLevel = document.createElement("td");
+  tdLevel.textContent = level.id; // show ID like FL, YS, BB
+
+  const tdSel = document.createElement("td");
+  const sel = document.createElement("select");
+  sel.id = "lvl_" + level.id;
+
+  // Options: you can change these if needed
+  const options = window.levelTable.map(l => l.id);
+
+  options.forEach(optId => {
+    const opt = document.createElement("option");
+    opt.value = optId;
+    opt.textContent = optId;
+    if (optId === level.id) opt.selected = true;
+    sel.appendChild(opt);
+  });
+
+  tdSel.appendChild(sel);
+  row.appendChild(tdLevel);
+  row.appendChild(tdSel);
+  levelTableBody.appendChild(row);
+});
+
 
 /* -----------------------------
    BUILD DROPDOWN UI
@@ -136,6 +191,12 @@ function applyManualSeed() {
   placed._spoiler = ["Manual seed"];
   placed._wayOfTheDragon = ["Manual seed"];
   placed._maxSphere = 0;
+  // Build _levels array from dropdowns
+placed._levels = window.levelTable.map(level => {
+  const sel = document.getElementById("lvl_" + level.id);
+  return sel.value;
+});
+
 
   window.lastGeneratedSeed = placed;
   window.seed = "MANUAL";
