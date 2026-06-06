@@ -618,6 +618,44 @@ function applyCanonicalMapping(canonical, random, patched) {
     }
 }
 
+function generateGbaPaletteBytes(baseHex) {
+    // Offsets derived from your original purple ramp
+    const OFFSETS = [
+        [0, 0, 0],          // base
+        [41, 49, 33],       // Δ1
+        [74, 99, 75],       // Δ2
+        [115, 132, 99]      // Δ3
+    ];
+
+    function rgb24ToGba15(r, g, b) {
+        const r5 = (r * 31 / 255) | 0;
+        const g5 = (g * 31 / 255) | 0;
+        const b5 = (b * 31 / 255) | 0;
+        return (b5 << 10) | (g5 << 5) | r5;
+    }
+
+    const baseR = parseInt(baseHex.slice(0, 2), 16);
+    const baseG = parseInt(baseHex.slice(2, 4), 16);
+    const baseB = parseInt(baseHex.slice(4, 6), 16);
+
+    const bytes = [];
+
+    for (const [dr, dg, db] of OFFSETS) {
+        const r = Math.min(255, Math.max(0, baseR + dr));
+        const g = Math.min(255, Math.max(0, baseG + dg));
+        const b = Math.min(255, Math.max(0, baseB + db));
+
+        const gba = rgb24ToGba15(r, g, b);
+
+        // Byte‑swap for ROM (little endian)
+        const low  = gba & 0xFF;
+        const high = (gba >> 8) & 0xFF;
+
+        bytes.push(low, high);
+    }
+
+    return bytes;
+}
 
 
 
@@ -732,6 +770,14 @@ async function patchRom() {
 		patched[textReplace.address+i] = encoded[i];
 		//console.log("writing " + encoded[i].toString(16) + " to " + textReplace.address+i.toString(16) + " " + textReplace.text);
 	  }
+  }
+  
+  //Patch colour
+  let playerColour = document.getElementById("favcolor")?.value ?? "#de0901";
+  colourPatch = generateGbaPaletteBytes(playerColour.substring(1));
+  for(let i = 0; i < 8; i++)
+  {
+	  patched[0x214CB8+i] = colourPatch[i];
   }
 
   const blob = new Blob([patched], { type: "application/octet-stream" });
