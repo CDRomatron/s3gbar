@@ -58,20 +58,17 @@ window.levelTable = [
 	"objTable": "0x28A074"
   },
   {
-    "id": "MM1",
+    "id": "MM",
     "room": "57",
 	"door": "580",
     "normal": "39492",
 	"roomTable": "0x1CB4F2",
-	"objTable": "0x2B1E24"
-  },
-  {
-    "id": "MM2",
-    "room": "60",
-	"door": "582",
-    "normal": "39494",
-	"roomTable": "0x1CB50E",
-	"objTable": "0x2B3080"
+	"objTable": "0x2B1E24",
+	"roomB": "60",
+	"doorB": "582",
+    "normalB": "39494",
+	"roomTableB": "0x1CB50E",
+	"objTableB": "0x2B3080"
   },
   {
     "id": "CS",
@@ -87,7 +84,12 @@ window.levelTable = [
 	"door": "623",
     "normal": "35439",
 	"roomTable": "0x1CB562",
-	"objTable": "0x298837"
+	"objTable": "0x298837",
+	"roomB": "70",
+	"doorB": "630",
+    "normalB": "33398",
+	"roomTableB": "0x1CB56E",
+	"objTableB": "0x29882A"
   },
   {
     "id": "RC",
@@ -95,7 +97,12 @@ window.levelTable = [
 	"door": "630",
     "normal": "37494",
 	"roomTable": "0x1CB572",
-	"objTable": "0x2DB7BE"
+	"objTable": "0x2DB7BE",
+	"roomB": "73",
+	"doorB": "614",
+    "normalB": "35430",
+	"roomTableB": "0x1CB54E",
+	"objTableB": "0x2DEA46"
   },
   {
     "id": "CR",

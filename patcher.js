@@ -576,7 +576,7 @@ function patchLZSS(rom, addressToDecode, length, offsetToChange, valueToWrite) {
 
 function applyCanonicalMapping(canonical, random, patched) {
     const table = window.levelTable;
-    const map = Object.fromEntries(table.map(x => [x.id, x]));
+    const map = Object.fromEntries(table.map(x => [x.id, x]));	
 
     for (let i = 0; i < canonical.length; i++) {
         const canon = map[canonical[i]];
@@ -613,7 +613,35 @@ function applyCanonicalMapping(canonical, random, patched) {
 			patched[objAddr+1] = hex.hi;
 		}
 		
-		
+		if(Object.hasOwn(rand, 'doorB')) {
+			const roomAddrB = parseInt(canon.roomTableB, 16);
+			const objAddrB  = parseInt(rand.objTableB, 16);
+			
+
+			// 1. Write random room → canonical roomTable
+			patched[roomAddrB] = Number(rand.roomB);
+
+			// 2. Compute rebuilt normal
+			const changeB = (Number(canon.doorB) - Number(rand.doorB));
+			const rebuiltB = Number(rand.normalB) + changeB;
+			
+			
+			if(Object.hasOwn(rand, 'offsetB')) {
+				const lenB = parseInt(rand.lenB, 16);
+				const offsetB = parseInt(rand.offsetB, 16);
+
+				// 3. Write rebuilt normal → random objTable
+				patchLZSS(patched, objAddrB, lenB, offsetB, rebuiltB)
+			}
+			else
+			{
+				const hexB = toTwoHexStrings(rebuiltB);
+			
+				// 3. Write rebuilt normal → random objTable
+				patched[objAddrB] = hexB.lo;
+				patched[objAddrB+1] = hexB.hi;
+			}
+		}
 		
     }
 }
