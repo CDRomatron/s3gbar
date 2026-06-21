@@ -440,7 +440,8 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 				while(itemPoolAfter[0] == "Hero\u0027s Heart Medal" 
 					|| itemPoolAfter[0] == "Heart of the Thieves\u0027 Guild"
 					|| itemPoolAfter[0] == "Military Cross"
-					|| itemPoolAfter[0] == "Sunspot Bloom") {
+					|| itemPoolAfter[0] == "Sunspot Bloom"
+					|| itemPoolAfter[0] == "The Arctic Cross") {
 					itemPoolAfter = shuffleArray(itemPoolAfter);
 				}
 				if (loc.location.substring(0,2) == "RH" && loc.location.includes("Chest") && itemPoolAfter.indexOf("Hero\u0027s Heart Medal") != -1) {
@@ -460,6 +461,10 @@ window.randomizeOriginal = function randomizeOriginal(table, options = {}) {
 					const itemIndex = itemPoolAfter.indexOf("Sunspot Bloom")
 					itemPoolAfter[itemIndex] = itemPoolAfter[0];
 					itemPoolAfter[0] = "Sunspot Bloom";
+				} else if (loc.location.includes("TG") && itemPoolAfter.indexOf("The Arctic Cross") != -1) {
+					const itemIndex = itemPoolAfter.indexOf("The Arctic Cross")
+					itemPoolAfter[itemIndex] = itemPoolAfter[0];
+					itemPoolAfter[0] = "The Arctic Cross";
 				}
 				
 				

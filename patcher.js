@@ -714,6 +714,8 @@ async function patchRom() {
   const original = loadedRomBytes;
   const patched = new Uint8Array(original);
 
+
+
   // Build ID → itemData lookup
   const itemDataById = {};
   for (const [name, info] of Object.entries(window.itemData)) {
@@ -807,6 +809,31 @@ async function patchRom() {
   {
 	  patched[0x214CB8+i] = colourPatch[i];
   }
+  
+  //Meta For Tracker
+  // Build lookup: location → placed item
+	const placedByLocation = new Map(
+	  placed.map(p => [p.location, p.item])
+	);
+
+	// Build lookup: item → original location ID
+	const itemToOriginalId = new Map(
+	  randomizerTable.map(loc => [loc.item, loc.id])
+	);
+	let metaCount = 0;
+	// Loop through every entry in randomizerTable
+	for (const loc of randomizerTable) {
+
+	  // 1. Find which item was placed at this location
+	  const placedItem = placedByLocation.get(loc.location);
+
+	  // 2. Find the original ID of that item
+	  const originalId = itemToOriginalId.get(placedItem);
+
+	  // 3. Store it
+	  patched[0x71BD30+metaCount] = parseInt(originalId, 16)
+	  metaCount += 1;
+	}
 
   const blob = new Blob([patched], { type: "application/octet-stream" });
   const url = URL.createObjectURL(blob);
